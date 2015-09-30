@@ -1,0 +1,14 @@
+diff -urN libubox.org/CMakeLists.txt libubox/CMakeLists.txt
+--- libubox.org/CMakeLists.txt	2015-09-30 19:38:29.488918620 +0900
++++ libubox/CMakeLists.txt	2015-09-30 19:38:52.948918389 +0900
+@@ -39,8 +39,8 @@
+ 	LIBRARY DESTINATION lib
+ )
+ 
+-ADD_SUBDIRECTORY(lua)
+-ADD_SUBDIRECTORY(examples)
++#ADD_SUBDIRECTORY(lua)
++#ADD_SUBDIRECTORY(examples)
+ 
+ find_library(json NAMES json-c)
+ IF(EXISTS ${json})
