@@ -77,9 +77,9 @@ sbindir=${exec_prefix}/sbin
 mandir=${datarootdir}/man
 
 CC=armv5-linux-gcc
-AR=ar
+AR=armv5-linux-ar
 RANLIB=ranlib
-STRIP=strip
+STRIP=armv5-linux-strip
 INSTALL=install
 CPPFLAGS=
 CFLAGS+=-I. -I$(srcdir) $(CPPFLAGS) -Os -W -Wall -Wno-pointer-sign

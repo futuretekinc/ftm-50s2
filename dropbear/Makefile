@@ -13,7 +13,7 @@ all: build install
 
 build:
 	make -C ${APP}-${VERSION} \
-		MULTI=1 \
+		STATIC=1 \
 		SCPPROGRESS=0 \
 		PROGRAMS="dropbear dropbearkey scp dbclient ssh"
 
