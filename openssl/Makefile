@@ -6,6 +6,7 @@ export AS=${CROSS}as
 export STRIP=${CROSS}strip
 export RANLIB=${CORSS}ranlib
 
+APP=openssl
 VERSION=1.0.2d
 INSTALLDIR=${PWD}/_install
 
