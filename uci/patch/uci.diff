@@ -1,0 +1,21 @@
+diff -urN uci/CMakeLists.txt uci.new/CMakeLists.txt
+--- uci/CMakeLists.txt	2015-09-30 19:57:00.000000000 +0900
++++ uci.new/CMakeLists.txt	2015-09-30 20:06:08.852902278 +0900
+@@ -12,6 +12,8 @@
+ CONFIGURE_FILE( ${CMAKE_SOURCE_DIR}/uci_config.h.in ${CMAKE_SOURCE_DIR}/uci_config.h )
+ 
+ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
++INCLUDE_DIRECTORIES(${CMAKE_LIBUBOX_DIR}/include)
++LINK_DIRECTORIES(${CMAKE_LIBUBOX_DIR}/lib)
+ 
+ SET(LIB_SOURCES libuci.c file.c util.c delta.c parse.c blob.c)
+ 
+@@ -25,7 +27,7 @@
+ 
+ ADD_LIBRARY(ucimap STATIC ucimap.c)
+ 
+-ADD_SUBDIRECTORY(lua)
++#ADD_SUBDIRECTORY(lua)
+ 
+ INSTALL(FILES uci.h uci_config.h uci_blob.h ucimap.h
+ 	DESTINATION include
