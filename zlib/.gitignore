@@ -1,3 +1,11 @@
+*.lo
+zlib-1.2.8/example
+zlib-1.2.8/example64
+zlib-1.2.8/examplesh
+zlib-1.2.8/libz.so.1.2.8
+zlib-1.2.8/minigzip
+zlib-1.2.8/minigzip64
+zlib-1.2.8/minigzipsh
 zlib-1.2.8/Makefile
 zlib-1.2.8/configure.log
 zlib-1.2.8/*.pc
