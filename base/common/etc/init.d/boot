@@ -19,6 +19,11 @@ start() {
 	fi
 	mounting "/dev" tmpfs mdev  1
 
+	if [ ! -d /dev/pts ]; then
+		mkdir /dev/pts
+	fi
+	mounting "/dev/pts" devpts devpts 0
+
 	if [ ! -d /var ]; then
 		mkdir /var 
 	fi
@@ -34,8 +39,6 @@ start() {
 	#   MDEV Support
 	#   (Requires sysfs support in the kernel)
 	#   ---------------------------------------------
-	mkdir /dev/pts
-	mounting "/dev/pts" devpts devpts 0
 	
 	echo -n " Populating devices            : "
 	mkdir /dev/input
