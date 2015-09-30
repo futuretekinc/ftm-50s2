@@ -1,2 +1,3 @@
 zlib-1.2.8/Makefile
 zlib-1.2.8/configure.log
+zlib-1.2.8/*.pc
