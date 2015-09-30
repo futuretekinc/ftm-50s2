@@ -18,7 +18,7 @@ configure:
 	cd ${APP}-${VERSION}; ./configure --host=arm-linux --prefix=/usr --disable-ipv6 CC=${CC}
 
 install:
-	make -C ${APP}-${VERSION} install
+	make -C ${APP}-${VERSION} install DESTDIR=${INSTALLDIR}
 
 clean:
 	make -C ${APP}-${VERSION} clean
