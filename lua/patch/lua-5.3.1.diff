@@ -1,0 +1,83 @@
+diff -urN lua-5.3.1/Makefile lua-5.3.1.new/Makefile
+--- lua-5.3.1/Makefile	2015-06-03 10:35:35.000000000 +0900
++++ lua-5.3.1.new/Makefile	2015-09-30 19:13:07.948933604 +0900
+@@ -10,7 +10,7 @@
+ # so take care if INSTALL_TOP is not an absolute path. See the local target.
+ # You may want to make INSTALL_LMOD and INSTALL_CMOD consistent with
+ # LUA_ROOT, LUA_LDIR, and LUA_CDIR in luaconf.h.
+-INSTALL_TOP= /usr/local
++INSTALL_TOP= ../../_install/usr
+ INSTALL_BIN= $(INSTALL_TOP)/bin
+ INSTALL_INC= $(INSTALL_TOP)/include
+ INSTALL_LIB= $(INSTALL_TOP)/lib
+Binary files lua-5.3.1/src/lapi.o and lua-5.3.1.new/src/lapi.o differ
+Binary files lua-5.3.1/src/lauxlib.o and lua-5.3.1.new/src/lauxlib.o differ
+Binary files lua-5.3.1/src/lbaselib.o and lua-5.3.1.new/src/lbaselib.o differ
+Binary files lua-5.3.1/src/lbitlib.o and lua-5.3.1.new/src/lbitlib.o differ
+Binary files lua-5.3.1/src/lcode.o and lua-5.3.1.new/src/lcode.o differ
+Binary files lua-5.3.1/src/lcorolib.o and lua-5.3.1.new/src/lcorolib.o differ
+Binary files lua-5.3.1/src/lctype.o and lua-5.3.1.new/src/lctype.o differ
+Binary files lua-5.3.1/src/ldblib.o and lua-5.3.1.new/src/ldblib.o differ
+Binary files lua-5.3.1/src/ldebug.o and lua-5.3.1.new/src/ldebug.o differ
+Binary files lua-5.3.1/src/ldo.o and lua-5.3.1.new/src/ldo.o differ
+Binary files lua-5.3.1/src/ldump.o and lua-5.3.1.new/src/ldump.o differ
+Binary files lua-5.3.1/src/lfunc.o and lua-5.3.1.new/src/lfunc.o differ
+Binary files lua-5.3.1/src/lgc.o and lua-5.3.1.new/src/lgc.o differ
+Binary files lua-5.3.1/src/liblua.a and lua-5.3.1.new/src/liblua.a differ
+Binary files lua-5.3.1/src/linit.o and lua-5.3.1.new/src/linit.o differ
+Binary files lua-5.3.1/src/liolib.o and lua-5.3.1.new/src/liolib.o differ
+Binary files lua-5.3.1/src/llex.o and lua-5.3.1.new/src/llex.o differ
+Binary files lua-5.3.1/src/lmathlib.o and lua-5.3.1.new/src/lmathlib.o differ
+Binary files lua-5.3.1/src/lmem.o and lua-5.3.1.new/src/lmem.o differ
+Binary files lua-5.3.1/src/loadlib.o and lua-5.3.1.new/src/loadlib.o differ
+Binary files lua-5.3.1/src/lobject.o and lua-5.3.1.new/src/lobject.o differ
+Binary files lua-5.3.1/src/lopcodes.o and lua-5.3.1.new/src/lopcodes.o differ
+Binary files lua-5.3.1/src/loslib.o and lua-5.3.1.new/src/loslib.o differ
+Binary files lua-5.3.1/src/lparser.o and lua-5.3.1.new/src/lparser.o differ
+Binary files lua-5.3.1/src/lstate.o and lua-5.3.1.new/src/lstate.o differ
+Binary files lua-5.3.1/src/lstring.o and lua-5.3.1.new/src/lstring.o differ
+Binary files lua-5.3.1/src/lstrlib.o and lua-5.3.1.new/src/lstrlib.o differ
+Binary files lua-5.3.1/src/ltable.o and lua-5.3.1.new/src/ltable.o differ
+Binary files lua-5.3.1/src/ltablib.o and lua-5.3.1.new/src/ltablib.o differ
+Binary files lua-5.3.1/src/ltm.o and lua-5.3.1.new/src/ltm.o differ
+Binary files lua-5.3.1/src/lua and lua-5.3.1.new/src/lua differ
+Binary files lua-5.3.1/src/luac and lua-5.3.1.new/src/luac differ
+Binary files lua-5.3.1/src/luac.o and lua-5.3.1.new/src/luac.o differ
+diff -urN lua-5.3.1/src/luaconf.h lua-5.3.1.new/src/luaconf.h
+--- lua-5.3.1/src/luaconf.h	2015-05-21 02:39:23.000000000 +0900
++++ lua-5.3.1.new/src/luaconf.h	2015-09-30 19:11:48.936934382 +0900
+@@ -61,7 +61,7 @@
+ #if defined(LUA_USE_LINUX)
+ #define LUA_USE_POSIX
+ #define LUA_USE_DLOPEN		/* needs an extra library: -ldl */
+-#define LUA_USE_READLINE	/* needs some extra libraries */
++//#define LUA_USE_READLINE	/* needs some extra libraries */
+ #endif
+ 
+ 
+Binary files lua-5.3.1/src/lua.o and lua-5.3.1.new/src/lua.o differ
+Binary files lua-5.3.1/src/lundump.o and lua-5.3.1.new/src/lundump.o differ
+Binary files lua-5.3.1/src/lutf8lib.o and lua-5.3.1.new/src/lutf8lib.o differ
+Binary files lua-5.3.1/src/lvm.o and lua-5.3.1.new/src/lvm.o differ
+Binary files lua-5.3.1/src/lzio.o and lua-5.3.1.new/src/lzio.o differ
+diff -urN lua-5.3.1/src/Makefile lua-5.3.1.new/src/Makefile
+--- lua-5.3.1/src/Makefile	2015-05-27 20:10:11.000000000 +0900
++++ lua-5.3.1.new/src/Makefile	2015-09-30 19:11:48.940934382 +0900
+@@ -6,7 +6,7 @@
+ # Your platform. See PLATS for possible values.
+ PLAT= none
+ 
+-CC= gcc -std=gnu99
++CC= armv5-linux-gcc -std=gnu99
+ CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_2 $(SYSCFLAGS) $(MYCFLAGS)
+ LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
+ LIBS= -lm $(SYSLIBS) $(MYLIBS)
+@@ -107,7 +107,7 @@
+ generic: $(ALL)
+ 
+ linux:
+-	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_LINUX" SYSLIBS="-Wl,-E -ldl -lreadline"
++	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_LINUX" SYSLIBS="-Wl,-E -ldl"
+ 
+ macosx:
+ 	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_MACOSX" SYSLIBS="-lreadline" CC=cc
