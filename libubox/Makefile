@@ -6,7 +6,7 @@ export AS=${CROSS}as
 export STRIP=${CROSS}strip
 export RANLIB=${CORSS}ranlib
 
-APP=src
+APP=libubox
 VERSION=
 INSTALLDIR=${PWD}/_install
 
