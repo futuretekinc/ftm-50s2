@@ -14,6 +14,8 @@ build:
 	make -C ${APP}-${VERSION} CC=${CC}
 
 configure:
+	cp config/config.ftm-50s2 ${APP}-${VERSION}/.config
+	make -C ${APP}-${VERSION} oldconfig
 
 install:
 	make -C ${APP}-${VERSION} install
