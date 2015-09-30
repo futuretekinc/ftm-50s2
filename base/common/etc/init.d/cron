@@ -1,0 +1,24 @@
+#!/bin/sh /etc/rc.common
+# Start/stop the cron daemon.
+
+START=60
+
+test -f /usr/sbin/cron || exit 0
+
+LSBNAMES='-l'  # Uncomment for LSB name support in /etc/cron.d/
+
+start()	 {
+	start-stop-daemon --start --quiet --pidfile /var/run/crond.pid \
+		--name cron --startas /usr/sbin/cron -- $LSBNAMES
+}
+
+stop()	 {
+	start-stop-daemon --stop --quiet --pidfile /var/run/crond.pid --name cron
+}
+
+restart() {
+	start-stop-daemon --stop --retry 5 --quiet --pidfile /var/run/crond.pid --name cron
+    start-stop-daemon --start --quiet --pidfile /var/run/crond.pid \
+		--name cron --startas /usr/sbin/cron -- $LSBNAMES
+}
+

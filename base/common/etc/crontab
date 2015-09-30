@@ -1,0 +1,7 @@
+SHELL=/bin/sh
+PATH=/sbin:/usr/sbin:/usr/bin
+#MAILTO=root
+#HOME=/
+
+#run parts
+00   00 * * * root /usr/sbin/rdate -s time.bora.net && /sbin/hwclock -w

@@ -1,0 +1,24 @@
+#!/bin/sh /etc/rc.common
+
+START=10
+
+start() {
+	. /etc/config/watchdog.conf
+    watchdog -t $WATCHDOG_TIMEOUT /dev/watchdog
+}
+
+stop() {
+	killall watchdog 2>/dev/null
+}
+
+restart() {
+	stop
+	start
+}
+status() {
+	if pidof watchdog | sed "s/$$\$//" | grep -q [0-9] ; then
+		echo "running"
+	else
+		echo "stopped"
+	fi
+}

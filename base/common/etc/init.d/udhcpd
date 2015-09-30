@@ -1,0 +1,28 @@
+#!/bin/sh /etc/rc.common
+
+START=70
+
+start() {
+	if ! pidof udhcpd | sed "s/$$\$//" | grep -q [0-9]
+	then
+		/sbin/udhcpd /etc/config/udhcpd.conf &
+	fi	
+}
+
+stop() {
+	pkill udhcpd
+}
+
+restart() {
+	stop
+	start
+}
+
+status() {
+	if pidof udhcpd | sed "s/$$\$//" | grep -q [0-9]
+	then
+		echo "running"
+	else
+		echo "stopped"
+	fi
+}

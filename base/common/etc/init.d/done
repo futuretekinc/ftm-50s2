@@ -1,0 +1,28 @@
+#!/bin/sh /etc/rc.common
+
+START=95
+
+boot() {
+	MODEL="FTM-50S"
+	SN="UNISSUED"
+
+	CMDLINE=`cat /proc/cmdline`
+	for x in $CMDLINE; do
+		case $x in
+			model=*)
+				MODEL="${x#model=}"
+				echo $MODEL > /var/model
+			;;
+			devid=*)
+				DEVID="${x#devid=}"
+				echo $DEVID > /var/devid
+			;;
+		esac
+	done
+	
+	echo ""
+	echo ""
+	echo "System initialization completed."
+	echo "        Model : $MODEL"
+	echo "    Device ID : $DEVID"
+}

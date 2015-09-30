@@ -1,0 +1,93 @@
+#!/bin/sh /etc/rc.common
+
+BOOT=10
+STOP=98
+
+start() {
+	if [ ! -d /proc ]; then
+		mkdir /proc	
+	fi
+	mounting "/proc" proc /proc 1
+
+	if [ ! -d /sys ]; then
+		mkdir /sys
+	fi
+	mounting "/sys" sysfs sysfs 1
+
+	if [ ! -d /dev ]; then
+		mkdir /dev
+	fi
+	mounting "/dev" tmpfs mdev  1
+
+	if [ ! -d /var ]; then
+		mkdir /var 
+	fi
+	mounting "/var" tmpfs tmpfs 0
+	if [ $? -eq 0 ]; then
+		mkdir /var/log
+		mkdir /var/lock
+		mkdir /var/run
+		mkdir /var/spool
+	fi
+	
+	#   ---------------------------------------------
+	#   MDEV Support
+	#   (Requires sysfs support in the kernel)
+	#   ---------------------------------------------
+	mkdir /dev/pts
+	mounting "/dev/pts" devpts devpts 0
+	
+	echo -n " Populating devices            : "
+	mkdir /dev/input
+	mkdir /dev/snd
+	mdev -s
+	status_out $? 0
+	
+	#   ---------------------------------------------
+	#   Mount User Space
+	#   ---------------------------------------------
+	if [ ! -d /mnt ]; then
+		mkdir /mnt
+	fi
+	mounting "/mnt" tmpfs tmpfs 0
+	
+	cat /proc/mtd | grep User >& /dev/null
+	if [ $? -eq 0 ] ; then
+		if [ ! -d /mnt/data ]; then
+			mkdir -p /mnt/data
+		fi
+
+		echo "/mnt/data" | awk '{ printf(" Mounting %-20s : ", $1)}'
+		MTDBLOCK=`cat /proc/mtd | grep "User" | awk '{ print $1 }' | sed -e 's/mtd//' -e 's/://' | awk '{ print "mtdblock" $1 }'`
+		
+		mount -t jffs2 /dev/$MTDBLOCK /mnt/data >& /dev/null
+		if [ $? -eq 0 ] ; then
+			echo "[SUCCESS]"
+		else
+			rmdir /mnt/data
+			echo "[FAILED]"
+		fi
+	fi
+	
+	
+	#   ---------------------------------------------
+	#   fstab support
+	#   ---------------------------------------------
+	echo "fstab" | awk '{ printf(" Mounting %-20s : ", $1)}'
+	mount -a
+	status_out $? 0
+
+	echo -n " Enabling hot-plug             : "
+	echo "/sbin/mdev" > /proc/sys/kernel/hotplug
+	status_out $? 0
+
+	echo -n " Populating devices            : "
+	mdev -s
+	status_out $? 0
+
+}
+
+stop() {
+        killall -9 syslogd 2> /dev/null
+}
+

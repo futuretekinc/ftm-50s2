@@ -1,0 +1,24 @@
+#!/bin/sh
+# Copyright (C) 2006 OpenWrt.org
+
+foreground=1
+
+run_scripts() {
+	for i in /etc/rc.d/$1*; do
+		[ -x $i ] && $i $2 2>&1
+	done | $LOGGER
+}
+
+HOME=/
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin:/opt/usr/bin:/opt/usr/sbin:/opt/usr/local/bin:/opt/usr/local/sbin
+LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib:/opt/lib:/opt/usr/lib:/opt/usr/local/lib
+export HOME PATH LD_LIBRARY_PATH 
+
+if [ `/bin/date +%Y` -lt 2009 ]; then
+	/bin/date 010112002009
+fi
+
+LOGGER="cat"
+[ -x /usr/bin/logger ] && LOGGER="logger -s -p 6 -t sysinit"
+			 
+run_scripts $1 $2

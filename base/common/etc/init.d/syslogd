@@ -1,0 +1,34 @@
+#!/bin/sh /etc/rc.common
+
+BOOT=22
+
+start() {
+	if ! pidof syslogd | sed "s/$$\$//" | grep -q [0-9]
+	then
+		syslogd -f /etc/config/syslogd.conf
+		klogd -c 1
+	fi  
+}
+
+stop() {
+	pkill klogd 2>/dev/null
+	pkill syslogd 2>/dev/null
+}  
+
+restart() {
+	stop
+	start
+}
+
+status() {
+	if pidof syslogd | sed "s/$$\$//" | grep -q [0-9] ; then
+		if pidof klogd >/dev/null ; then
+			echo "running"
+		else
+			echo "stopped"
+		fi  
+	else
+		echo "stopped"
+	fi  
+}
+

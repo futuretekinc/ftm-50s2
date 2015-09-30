@@ -1,0 +1,16 @@
+TIMEOUT 20
+ABORT   'BUSY'
+ABORT   'NO CARRIER'
+ABORT   'NO AWSWER'
+SAY     'Starting Modem Conection\n'
+
+
+''      AT
+OK      ATZ
+OK      AT
+OK      ATDT*98#
+CONNECT CLIENT
+
+SAY     'PPP Connected\n'
+
+

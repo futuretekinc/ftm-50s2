@@ -1,0 +1,1 @@
+/opt/thingplus-gateway/device/config/default.js

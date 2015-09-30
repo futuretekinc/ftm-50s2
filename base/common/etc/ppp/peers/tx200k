@@ -1,0 +1,11 @@
+/dev/ttyS1 	#device name
+user KT		#user id
+115200		#speed
+defaultroute	#route
+usepeerdns	#dns
+-detach		#pppd run in background
+#crtscts	#comm check option
+noauth		#authentication
+connect		"/usr/sbin/chat -v -f /etc/ppp/peers/tx200k-connect"
+disconnect	"/usr/sbin/chat -v -f /etc/ppp/peers/tx200k-disconnect"
+

@@ -1,0 +1,8 @@
+# atatic table loopup for host names
+#
+# resolv.conf points to the local resolver (dnsmasq), that in turn serves the
+# host name listed in /etc/sysconfig/dnsmasq/hosts
+# 
+127.0.0.1		localhost	localhost.localdomain
+168.126.63.1	168.126.63.1	#nameserver
+168.126.63.2	168.126.63.2	#nameserver

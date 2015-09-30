@@ -1,0 +1,62 @@
+#!/bin/sh
+
+STKDIR=/opt/STM/STLinux-2.4/devkit/armv5/target
+DESTDIR=/home/xtra/work/ftm-50s2/mmc
+
+(
+	sudo mknod $DESTDIR/dev/ram0     b   1   0   # all on needs is ram0
+	sudo mknod $DESTDIR/dev/ram1     b   1   1
+	
+	sudo mknod $DESTDIR/dev/hda      b   3   0   # compact flash
+	sudo mknod $DESTDIR/dev/hda1     b   3   1
+	sudo mknod $DESTDIR/dev/hda2     b   3   2
+	sudo mknod $DESTDIR/dev/hda3     b   3   3
+	sudo mknod $DESTDIR/dev/hda4     b   3   4
+	
+	sudo mknod $DESTDIR/dev/mem      c   1   1
+	sudo mknod $DESTDIR/dev/kmem     c   1   2
+	sudo mknod $DESTDIR/dev/null     c   1   3
+	sudo mknod $DESTDIR/dev/port     c   1   4
+	sudo mknod $DESTDIR/dev/zero     c   1   5
+	sudo mknod $DESTDIR/dev/core     c   1   6
+	sudo mknod $DESTDIR/dev/full     c   1   7
+	sudo mknod $DESTDIR/dev/random   c   1   8   # used by dropbear to generate keys
+	sudo mknod $DESTDIR/dev/urandom  c   1   9   # used by dropbear to generate keys
+	sudo mknod $DESTDIR/dev/vsys     c   1   10
+	
+	sudo mknod $DESTDIR/dev/ptyp0    c   2   0   # pseudo terminal devices for dropbear
+	sudo mknod $DESTDIR/dev/ptyp1    c   2   1
+	sudo mknod $DESTDIR/dev/ptyp2    c   2   2
+	sudo mknod $DESTDIR/dev/ptyp3    c   2   3
+	sudo mknod $DESTDIR/dev/ptyp4    c   2   4
+	
+	sudo mknod $DESTDIR/dev/ttyp0    c   3   0   # pseudo terminal devices for telnet
+	sudo mknod $DESTDIR/dev/ttyp1    c   3   1
+	sudo mknod $DESTDIR/dev/ttyp2    c   3   2
+	sudo mknod $DESTDIR/dev/ttyp3    c   3   3
+	sudo mknod $DESTDIR/dev/ttyp4    c   3   4
+	
+	sudo mknod $DESTDIR/dev/ttyS0    c   4   64  # console port
+	sudo mknod $DESTDIR/dev/ttyS1    c   4   65  # used for kgdb
+	
+	sudo mknod $DESTDIR/dev/tty0     c   4   0
+	sudo mknod $DESTDIR/dev/tty1     c   4   1   # not needed
+	sudo mknod $DESTDIR/dev/tty2     c   4   2   # not needed
+	sudo mknod $DESTDIR/dev/tty3     c   4   3   # not needed
+	sudo mknod $DESTDIR/dev/tty4     c   4   4   # not needed
+	
+	sudo mknod $DESTDIR/dev/tty      c   5   0
+	sudo mknod $DESTDIR/dev/console  c   5   1
+	sudo mknod $DESTDIR/dev/ptmx     c   5   2   # dropbear sshd
+						
+	sudo mknod $DESTDIR/dev/watchdog c   10  130 # watchdog in SC1100
+							
+	sudo mknod $DESTDIR/dev/ppp      c   108 0   # Point-to-Point Protocol
+								
+	ln -sf ram0            $DESTDIR/dev/ramdisk
+#	ln -sf urandom         $DESTDIR/dev/random  # used by dropbear workaround, 1,8 was dead
+	ln -sf /proc/self/fd/0 $DESTDIR/dev/stdin   # process i/o
+	ln -sf /proc/self/fd/1 $DESTDIR/dev/stdout
+	ln -sf /proc/self/fd/2 $DESTDIR/dev/stderr
+	ln -sf /proc/kcore     $DESTDIR/dev/kcore
+)
