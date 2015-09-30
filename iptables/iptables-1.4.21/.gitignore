@@ -7,13 +7,15 @@
 .dirstamp
 .libs/
 Makefile
+Makefile.in
 
 /include/xtables-version.h
 /include/iptables/internal.h
 
+/aclocal.m4
 /autom4te.cache/
-config.log
-config.h
-config.status
+/build-aux/
+/config.*
+/configure
 /libtool
 /stamp-h1

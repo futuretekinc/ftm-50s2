@@ -41,4 +41,9 @@ openssl-*/test/ssltest
 openssl-*/test/v3nametest
 openssl-*/test/verify_extra_test
 openssl-*/test/wp_test
+openssl-*/crypto/opensslconf.h
+openssl-*/libcrypto.pc
+openssl-*/libssl.pc
+openssl-*/openssl.pc
+openssl-*/tools/c_rehash
 
