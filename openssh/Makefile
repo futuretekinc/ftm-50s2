@@ -14,7 +14,7 @@ INSTALLDIR=${PWD}/_install
 all: build install
 
 build:
-	make -C ${APP}-${VERSION} 
+	make -C ${APP}-${VERSION}  CC=${CC} LD=${LD} AR=${AR}
 
 configure:
 	cd ${APP}-${VERSION}; \
@@ -23,7 +23,10 @@ configure:
 		--with-zlib=${ZLIBDIR} \
 		--with-ssl-dir=${SSLDIR} \
 		--disable-etc-default-login \
+		--without-hardening \
+		--without-stackprotect \
 		CC=${CC} \
+		LD=${LD} \
 		AR=${AR} 
 
 install:
