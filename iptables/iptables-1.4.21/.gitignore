@@ -7,7 +7,6 @@
 .dirstamp
 .libs/
 Makefile
-Makefile.in
 
 /include/xtables-version.h
 /include/iptables/internal.h
@@ -16,5 +15,6 @@ Makefile.in
 /autom4te.cache/
 /build-aux/
 /config.*
+/configure
 /libtool
 /stamp-h1
