@@ -8,7 +8,7 @@ export RANLIB=${CORSS}ranlib
 
 APP=lua
 VERSION=5.3.1
-INSTALLDIR=${PWD}/_install
+INSTALLDIR=${CURDIR}/_install
 
 all: build install
 
@@ -18,7 +18,7 @@ build:
 configure:
 
 install:
-	make -C ${APP}-${VERSION} install
+	make -C ${APP}-${VERSION} install DESTDIR=${INSTALLDIR}
 
 clean:
 	make -C ${APP}-${VERSION} clean

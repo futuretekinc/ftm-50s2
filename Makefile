@@ -36,4 +36,3 @@ clean:
 	for app in $(APPS); do \
 		make -C $$app clean; \
 	done
-

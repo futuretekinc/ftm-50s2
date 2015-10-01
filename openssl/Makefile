@@ -8,7 +8,7 @@ export RANLIB=${CORSS}ranlib
 
 APP=openssl
 VERSION=1.0.2d
-INSTALLDIR=${PWD}/_install
+INSTALLDIR=${CURDIR}/_install
 
 all: build install
 

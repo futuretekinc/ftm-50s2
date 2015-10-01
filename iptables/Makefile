@@ -7,7 +7,7 @@ export STRIP=${CROSS}strip
 
 APP=iptables
 VERSION=1.4.21
-INSTALLDIR=${PWD}/_install
+INSTALLDIR=${CURDIR}/_install
 
 all: build install
 

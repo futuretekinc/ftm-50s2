@@ -6,7 +6,7 @@ export AS=${CROSS}as
 
 APP=busybox
 VERSION=1.23.2
-INSTALLDIR=${PWD}/_install
+INSTALLDIR=${CURDIR}/_install
 
 all: build install
 

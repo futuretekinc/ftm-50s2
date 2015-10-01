@@ -7,7 +7,7 @@ export STRIP=${CROSS}strip
 
 APP=libpcap
 VERSION=1.7.4
-INSTALLDIR=${PWD}/_install
+INSTALLDIR=${CURDIR}/_install
 
 all: build install
 

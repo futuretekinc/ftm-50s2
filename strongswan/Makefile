@@ -8,7 +8,7 @@ export RANLIB=${CORSS}ranlib
 
 APP=strongswan
 VERSION=5.3.3
-INSTALLDIR=${PWD}/_install
+INSTALLDIR=${CURDIR}/_install
 
 all: build install
 

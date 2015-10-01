@@ -7,9 +7,9 @@ export STRIP=${CROSS}strip
 
 APP=openssh
 VERSION=7.1p1
-SSLDIR=${PWD}/../openssl/_install
-ZLIBDIR=${PWD}/../zlib/_install
-INSTALLDIR=${PWD}/_install
+SSLDIR=${CURDIR}/../openssl/_install
+ZLIBDIR=${CURDIR}/../zlib/_install
+INSTALLDIR=${CURDIR}/_install
 
 all: build install
 

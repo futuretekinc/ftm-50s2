@@ -8,7 +8,7 @@ export RANLIB=${CORSS}ranlib
 
 APP=libubox
 VERSION=
-INSTALLDIR=${PWD}/_install
+INSTALLDIR=${CURDIR}/_install
 
 all: build install
 

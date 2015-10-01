@@ -8,7 +8,7 @@ export TARGETMACH=arm-linux
 
 APP=zlib
 VERSION=1.2.8
-INSTALLDIR=${PWD}/_install
+INSTALLDIR=${CURDIR}/_install
 
 all: build install
 

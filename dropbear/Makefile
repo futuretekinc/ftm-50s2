@@ -7,7 +7,7 @@ export STRIP=${CROSS}strip
 
 APP=dropbear
 VERSION=2015.68
-INSTALLDIR=${PWD}/_install
+INSTALLDIR=${CURDIR}/_install
 
 all: build install
 
@@ -15,7 +15,7 @@ build:
 	make -C ${APP}-${VERSION} \
 		STATIC=1 \
 		SCPPROGRESS=0 \
-		PROGRAMS="dropbear dropbearkey scp dbclient ssh"
+		PROGRAMS="dropbear dropbearkey scp dbclient"
 
 configure:
 	cd ${APP}-${VERSION};\
