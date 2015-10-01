@@ -8,7 +8,11 @@ build:
 		make -C $$app; \
 	done
 
-
+configure:
+	for app in $(COMMON_APPS); do \
+		make -C $$app configure; \
+	done
+	
 target_gen: 
 	rm -rf ${TARGET}/*;
 	tools/make_target ${TARGET};
