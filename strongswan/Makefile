@@ -24,7 +24,7 @@ configure:
 		CC=${CC} AR=${AR} RANLIB=${RANLIB}
 
 install:
-	make -C ${APP}-${VERSION} install
+	make -C ${APP}-${VERSION} install DESTDIR=${INSTALLDIR}
 
 clean:
 	make -C ${APP}-${VERSION} clean
