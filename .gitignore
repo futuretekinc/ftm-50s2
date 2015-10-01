@@ -57,7 +57,7 @@ u-boot.srec
 !.gitignore
 !.mailmap
 
-!base/*
+!base/common/dev
 #
 # Generated include files
 #

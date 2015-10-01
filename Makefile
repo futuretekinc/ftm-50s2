@@ -10,18 +10,20 @@ build:
 
 
 target_gen: 
-	rm -rf ${TARGET}/*
+	rm -rf ${TARGET}/*;
+	tools/make_target ${TARGET};
 	cp -r base/common/* ${TARGET}/
-	tools/make_dev
+	tools/make_dev ${TARGET};
 	for app in $(COMMON_APPS); do \
 		cp -r $$app/_install/* ${TARGET}/; \
 	done
 
 target_tpgw:
-	rm -rf ${TARGET}/*
+	rm -rf ${TARGET}/*;
+	tools/make_target ${TARGET};
 	cp -r base/common/* ${TARGET}/;
 	cp -r base/tpgw/* ${TARGET}/;
-	tools/make_dev;
+	tools/make_dev ${TARGET};
 	for app in $(cOMMON_APPS); do \
 		cp -r $$app/_install/* ${TARGET}/; \
 	done

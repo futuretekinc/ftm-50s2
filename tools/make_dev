@@ -1,7 +1,13 @@
 #!/bin/sh
 
 STKDIR=/opt/STM/STLinux-2.4/devkit/armv5/target
-DESTDIR=/home/xtra/work/ftm-50s2/mmc
+
+if [ $# -lt 1 ] ; then
+	echo "target undefined"
+	exit 3
+else
+	DESTDIR=$1
+fi
 
 (
 	sudo mknod $DESTDIR/dev/ram0     b   1   0   # all on needs is ram0

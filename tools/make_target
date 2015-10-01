@@ -1,0 +1,11 @@
+#!/bin/sh
+
+
+if [ $# -lt 1 ]; then
+	echo "Target undefined!."
+else
+	DESTDIR=$1
+fi
+
+mkdir -p $DESTDIR/bin $DESTDIR/boot  $DESTDIR/dev  $DESTDIR/etc  $DESTDIR/lib  $DESTDIR/root  $DESTDIR/sbin  $DESTDIR/tmp  $DESTDIR/usr  $DESTDIR/var  $DESTDIR/www
+
