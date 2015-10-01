@@ -11,10 +11,9 @@ Makefile
 /include/xtables-version.h
 /include/iptables/internal.h
 
-/aclocal.m4
 /autom4te.cache/
-/build-aux/
-/config.*
-/configure
+config.log
+config.h
+config.status
 /libtool
 /stamp-h1
