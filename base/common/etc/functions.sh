@@ -55,6 +55,10 @@ list_remove() {
 	eval "export ${NO_EXPORT:+-n} -- \"$var=\$val\""
 }
 
+config_load() {
+	[ -n "$IPKG_INSTROOT" ] && return 0
+	uci_load "$@"
+}
 
 reset_cb() {
 	config_cb() { return 0; }
@@ -259,6 +263,17 @@ jffs2_mark_erase() {
 	echo -e "\xde\xad\xc0\xde" | mtd -qq write - "$1"
 }
 
+uci_apply_defaults() {
+	cd /etc/uci-defaults || return 0
+	files="$(ls)"
+	[ -z "$files" ] && return 0
+	mkdir -p /tmp/.uci
+	for file in $files; do
+		( . "./$(basename $file)" ) && rm -f "$file"
+	done
+	uci commit
+}
+
 service_kill() {
 	local name="${1}"
 	local pid="${2:-$(pidof "$name")}"
@@ -297,7 +312,6 @@ pi_include() {
 	return 0
 }
 
-
 status_out() {
 	if [ $1 -eq 0 ] ; then
 		echo "[SUCCESS]"
@@ -317,3 +331,4 @@ mounting() {
 	status_out $? $4
 }
 
+[ -z "$IPKG_INSTROOT" -a -f /lib/config/uci.sh ] && . /lib/config/uci.sh

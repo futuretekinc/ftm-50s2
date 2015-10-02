@@ -9,6 +9,8 @@
 #
 # Normal rules
 #
+lxdialog
+mconf
 busybox-1.23.2/applets/Kbuild
 busybox-1.23.2/applets/applet_tables
 busybox-1.23.2/applets/usage
