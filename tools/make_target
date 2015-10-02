@@ -1,11 +1,18 @@
 #!/bin/sh
 
 
+SUBDIR="bin boot dev etc etc/network/if-up.d etc/network/if-down.d etc/network/if-pre-up.d lib root sbin tmp usr var www"
+
 if [ $# -lt 1 ]; then
 	echo "Target undefined!."
+	exit 1
 else
+
 	DESTDIR=$1
 fi
 
-mkdir -p $DESTDIR/bin $DESTDIR/boot  $DESTDIR/dev  $DESTDIR/etc  $DESTDIR/lib  $DESTDIR/root  $DESTDIR/sbin  $DESTDIR/tmp  $DESTDIR/usr  $DESTDIR/var  $DESTDIR/www
+for dir in $SUBDIR ; do
+	mkdir -p $DESTDIR/$dir
+done
+
 
