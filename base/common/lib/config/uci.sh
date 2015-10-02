@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell script compatibility wrappers for /sbin/uci
+# Shell script compatibility wrappers for uci
 #
 # Copyright (C) 2008-2010  OpenWrt.org
 # Copyright (C) 2008  Felix Fietkau <nbd@openwrt.org>
@@ -37,7 +37,7 @@ uci_load() {
 		export ${NO_EXPORT:+-n} CONFIG_SECTION=
 	fi
 
-	DATA="$(/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} ${LOAD_STATE:+-P /var/state} -S -n export "$PACKAGE" 2>/dev/null)"
+	DATA="$(uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} ${LOAD_STATE:+-P /var/state} -S -n export "$PACKAGE" 2>/dev/null)"
 	RET="$?"
 	[ "$RET" != 0 -o -z "$DATA" ] || eval "$DATA"
 	unset DATA
@@ -48,9 +48,9 @@ uci_load() {
 
 uci_set_default() {
 	local PACKAGE="$1"
-	/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} -q show "$PACKAGE" > /dev/null && return 0
-	/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} import "$PACKAGE"
-	/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} commit "$PACKAGE"
+	uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} -q show "$PACKAGE" > /dev/null && return 0
+	uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} import "$PACKAGE"
+	uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} commit "$PACKAGE"
 }
 
 uci_revert_state() {
@@ -58,7 +58,7 @@ uci_revert_state() {
 	local CONFIG="$2"
 	local OPTION="$3"
 
-	/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} -P /var/state revert "$PACKAGE${CONFIG:+.$CONFIG}${OPTION:+.$OPTION}"
+	uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} -P /var/state revert "$PACKAGE${CONFIG:+.$CONFIG}${OPTION:+.$OPTION}"
 }
 
 uci_set_state() {
@@ -68,7 +68,7 @@ uci_set_state() {
 	local VALUE="$4"
 
 	[ "$#" = 4 ] || return 0
-	/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} -P /var/state set "$PACKAGE.$CONFIG${OPTION:+.$OPTION}=$VALUE"
+	uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} -P /var/state set "$PACKAGE.$CONFIG${OPTION:+.$OPTION}=$VALUE"
 }
 
 uci_toggle_state() {
@@ -82,7 +82,7 @@ uci_set() {
 	local OPTION="$3"
 	local VALUE="$4"
 
-	/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} set "$PACKAGE.$CONFIG.$OPTION=$VALUE"
+	uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} set "$PACKAGE.$CONFIG.$OPTION=$VALUE"
 }
 
 uci_get_state() {
@@ -96,7 +96,7 @@ uci_get() {
 	local DEFAULT="$4"
 	local STATE="$5"
 
-	/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} ${STATE:+-P $STATE} -q get "$PACKAGE${CONFIG:+.$CONFIG}${OPTION:+.$OPTION}"
+	uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} ${STATE:+-P $STATE} -q get "$PACKAGE${CONFIG:+.$CONFIG}${OPTION:+.$OPTION}"
 	RET="$?"
 	[ "$RET" -ne 0 ] && [ -n "$DEFAULT" ] && echo "$DEFAULT"
 	return "$RET"
@@ -108,9 +108,9 @@ uci_add() {
 	local CONFIG="$3"
 
 	if [ -z "$CONFIG" ]; then
-		export ${NO_EXPORT:+-n} CONFIG_SECTION="$(/sbin/uci add "$PACKAGE" "$TYPE")"
+		export ${NO_EXPORT:+-n} CONFIG_SECTION="$(uci add "$PACKAGE" "$TYPE")"
 	else
-		/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} set "$PACKAGE.$CONFIG=$TYPE"
+		uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} set "$PACKAGE.$CONFIG=$TYPE"
 		export ${NO_EXPORT:+-n} CONFIG_SECTION="$CONFIG"
 	fi
 }
@@ -120,7 +120,7 @@ uci_rename() {
 	local CONFIG="$2"
 	local VALUE="$3"
 
-	/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} rename "$PACKAGE.$CONFIG=$VALUE"
+	uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} rename "$PACKAGE.$CONFIG=$VALUE"
 }
 
 uci_remove() {
@@ -128,10 +128,10 @@ uci_remove() {
 	local CONFIG="$2"
 	local OPTION="$3"
 
-	/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} del "$PACKAGE.$CONFIG${OPTION:+.$OPTION}"
+	uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} del "$PACKAGE.$CONFIG${OPTION:+.$OPTION}"
 }
 
 uci_commit() {
 	local PACKAGE="$1"
-	/sbin/uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} commit $PACKAGE
+	uci ${UCI_CONFIG_DIR:+-c $UCI_CONFIG_DIR} commit $PACKAGE
 }
