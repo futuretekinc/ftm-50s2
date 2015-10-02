@@ -1,6 +1,6 @@
 export CROSS=armv5-linux-
 export CC=${CROSS}gcc
-export AR=${CROSS}"ar r"
+export AR=${CROSS}ar
 export LD=${CROSS}ld
 export AS=${CROSS}as
 export STRIP=${CROSS}strip
@@ -19,7 +19,7 @@ configure:
 	cd ${APP}-${VERSION}; ./Configure dist --prefix=${INSTALLDIR}
 
 install:
-	make -C ${APP}-${VERSION} install
+	make -C ${APP}-${VERSION} install DESTDIR=${INSTALLDIR}
 
 clean:
 	make -C ${APP}-${VERSION} clean

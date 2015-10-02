@@ -46,4 +46,5 @@ openssl-*/libcrypto.pc
 openssl-*/libssl.pc
 openssl-*/openssl.pc
 openssl-*/tools/c_rehash
+openssl-*/Makefile.bak
 
