@@ -1,5 +1,5 @@
 TARGET=mmc
-COMMON_APPS=busybox openssl iptables zlib openssh libpcap tcpdump
+COMMON_APPS=busybox openssl iptables zlib openssh libpcap tcpdump lua libubox uci
 
 all: build
 

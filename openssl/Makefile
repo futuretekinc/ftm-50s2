@@ -1,6 +1,6 @@
 export CROSS=armv5-linux-
 export CC=${CROSS}gcc
-export AR=${CROSS}ar
+export AR="${CROSS}ar r"
 export LD=${CROSS}ld
 export AS=${CROSS}as
 export STRIP=${CROSS}strip

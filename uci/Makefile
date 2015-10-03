@@ -16,7 +16,7 @@ build:
 	make -C ${APP} 
 
 configure:
-	cd ${APP}; cmake -D CMAKE_C_COMPILER=${CC} -D CMAKE_INSTALL_PREFIX:PATH=/usr -D CMAKE_LIBUBOX_DIR:=${PWD}/../libubox/_install/usr .
+	cd ${APP}; cmake -D CMAKE_C_COMPILER=${CC} -D CMAKE_INSTALL_PREFIX:PATH=/usr -D CMAKE_LIBUBOX_DIR:=${CURDIR}/../libubox/_install/usr .
 
 install:
 	make -C ${APP} install DESTDIR=${INSTALLDIR}
