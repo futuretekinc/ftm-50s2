@@ -13,11 +13,6 @@ stop() {
 	pkill udhcpd
 }
 
-restart() {
-	stop
-	start
-}
-
 status() {
 	if pidof udhcpd | sed "s/$$\$//" | grep -q [0-9]
 	then

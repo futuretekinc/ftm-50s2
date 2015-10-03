@@ -1,20 +1,17 @@
 #!/bin/sh /etc/rc.common
 
-START=10
+START=97
 
 start() {
 	. /etc/config/watchdog.conf
-    watchdog -t $WATCHDOG_TIMEOUT /dev/watchdog
+	[ -c /dev/watchdog ] && [ -x /sbin/watchdog ] && [ -x /bin/nice ] && \
+    	/bin/nice -n -20 /sbin/watchdog -t $WATCHDOG_TIMEOUT -T 300 /dev/watchdog
 }
 
 stop() {
-	killall watchdog 2>/dev/null
+	killall -q watchdog 
 }
 
-restart() {
-	stop
-	start
-}
 status() {
 	if pidof watchdog | sed "s/$$\$//" | grep -q [0-9] ; then
 		echo "running"
