@@ -19,3 +19,7 @@ Makefile.in
 /configure
 /libtool
 /stamp-h1
+/iptables/iptables-apply.8
+/iptables/iptables-restore.8
+/iptables/iptables-save.8
+/iptables/iptables-xml.1
