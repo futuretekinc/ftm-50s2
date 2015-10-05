@@ -1,3 +1,4 @@
+*.bak
 openssl-*/Makefile
 openssl-*/apps/openssl
 openssl-*/crypto/buildinf.h
