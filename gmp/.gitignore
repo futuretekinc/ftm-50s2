@@ -1,5 +1,6 @@
 *.lo
 *.la
+*.tmp
 \mpn
 gmp-6.0.0/config.log
 gmp-6.0.0/Makefile
