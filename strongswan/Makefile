@@ -5,6 +5,7 @@ export LD=${CROSS}ld
 export AS=${CROSS}as
 export STRIP=${CROSS}strip
 export RANLIB=${CORSS}ranlib
+export GMPDIR=${CURDIR}/../gmp/_install/usr
 
 APP=strongswan
 VERSION=5.2.2
