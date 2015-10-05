@@ -7,7 +7,7 @@ export STRIP=${CROSS}strip
 export RANLIB=${CORSS}ranlib
 
 APP=strongswan
-VERSION=5.3.3
+VERSION=5.2.2
 INSTALLDIR=${CURDIR}/_install
 
 all: build install
