@@ -5,14 +5,7 @@ foreground=1
 
 run_scripts() {
 	for i in /etc/rc.d/$1*; do
-		echo -n "$i starting ..."
 		[ -x $i ] && $i $2 2>&1
-
-		if [ $? -eq 0 ]; then
-			echo "[SUCCESS]"
-		else
-			echo "[FAILED]"
-		fi
 	done | $LOGGER
 }
 
