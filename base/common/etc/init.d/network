@@ -9,6 +9,7 @@ boot() {
 
 	include /lib/network
 	setup_switch
+	ifup -a
 #
 #	scan_interfaces
 #

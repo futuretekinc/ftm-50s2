@@ -5,7 +5,16 @@ START=70
 start() {
 	if ! pidof udhcpd | sed "s/$$\$//" | grep -q [0-9]
 	then
-		/sbin/udhcpd /etc/config/udhcpd.conf &
+		if [ ! -f /var/lib/misc/udhcpd.leases ]; then
+			
+			if [ ! -d /var/lib/misc ]; then
+				mkdir -p /var/lib/misc
+			fi
+
+			echo "" > /var/lib/misc/udhcpd.leases
+		fi
+
+		/sbin/udhcpd /etc/config/udhcpd &
 	fi	
 }
 
