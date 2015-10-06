@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+<title>FutureTek</title>
+<link href="styles/common.css" rel="stylesheet" type="text/css" />
+<link href="styles/login.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="scripts/alias.js"></script>
+<script type="text/javascript">
+<!--
+function send_data()
+{
+    //document.login.submit();
+    window.location.href = "config.html";
+}
+-->
+</script>
+</head>
+
+<body>
+<div id="main_box">
+  <div id="title"></div>
+  <div id="contents">
+    <form name="login" method="get" action="cgi-bin/login.cgi">
+      <div class="blank0">&nbsp;</div>
+      <div id="action" onclick="send_data();" >Login</div>
+      <div class="str">ID</div>
+      <input class="values" name="id" type="text" value=""/>
+      <div class="blank1">&nbsp;</div>
+      <div class="str">Password</div>
+      <input class="values" name="password" type="password" value=""/>
+    </form>
+  </div>
+</div>
+
+</body>
+
+</html>

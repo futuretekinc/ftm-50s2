@@ -10,7 +10,6 @@ function onInit()
 	document.getElementById('section2_title').innerHTML = "사용자 정보";
 	document.getElementById('title_model').innerHTML = "모델 :";
 	document.getElementById('title_sn').innerHTML = "일련번호 :";
-	document.getElementById('title_modem_version').innerHTML = "모뎀버전 :";
 //	document.getElementById('title_loc').innerHTML = "위치: ";
 	document.getElementById('title_current_pw').innerHTML = "기존 비밀번호: ";
 	document.getElementById('title_new_pw').innerHTML = "새 비밀번호: ";
@@ -71,7 +70,7 @@ function onLoad()
 //						document.getElementById('location').innerHTML= div_location[0].firstChild.nodeValue;
 //					}
 				}
-				loadModemVersion();
+				
 			}
 			catch(e)
 			{
@@ -178,61 +177,6 @@ function onApplyLocation()
 	    }
 		}
   }
-	xmlhttp.send();
-}
-
-function loadModemVersion()
-{
-	document.getElementById('message').innerHTML='잠시만 기다려 주십시오..';
-	if(typeof window.ActiveXObject != 'undefined')
-	{
-		xmlhttp = (new ActiveXObject("Microsoft.XMLHTTP"));
-	}
-	else
-	{
-		xmlhttp = (new XMLHttpRequest());
-	}
-	
-	var data = "/cgi-bin/module?cmd=state";
-
-	xmlhttp.open( "POST", data, true );
-	xmlhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=euc-kr");
-	xmlhttp.onreadystatechange = function()
-	{
-		if( (xmlhttp.readyState == 4) && (xmlhttp.status == 200) )
-		{
-			try
-            {
-            	result = xmlhttp.responseXML.documentElement.getElementsByTagName("res")[0];
-            	if (result.firstChild.nodeValue == 'OK') {
-            		// 파싱
-            		var result2 = xmlhttp.responseXML.documentElement.getElementsByTagName("text")[0];
-            		var text = result2.firstChild.nodeValue;
-					if (text == "done" || text == "URC MESSAGE")
-					{
-						//alert("Please Refresh..");
-						document.getElementById('message').innerHTML='다시 시도해 주십시오..';
-						return;
-					}
-					document.getElementById('message').innerHTML='';
-					var trimText = trim(text);
-					var textArr = trimText.split("||");
-					var ATCOMMAND = textArr[0].split(":")[0];
-					var ATCOMMAND_RES = textArr[0].split(":")[1];
-					//alert(ATCOMMAND_RES);
-					document.getElementById('modem_version').innerHTML = ATCOMMAND_RES;
-					
-            	} else {
-            		// error
-            		alert(result.firstChild.nodeValue);
-            	}
-            }
-            catch(e)
-            {
-
-            }
-		}
-	}
 	xmlhttp.send();
 }
 

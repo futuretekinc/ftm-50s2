@@ -27,7 +27,7 @@ function onLoad()
 {
 	onInit();
 
-	enablePageTimeout();
+	//enablePageTimeout();
 	
 	if(typeof window.ActiveXObject != 'undefined')
 	{
@@ -58,11 +58,12 @@ function onLoad()
 				_dns1	= xmlhttp.responseXML.documentElement.getElementsByTagName("DNS1")[0];
 				_dns2	= xmlhttp.responseXML.documentElement.getElementsByTagName("DNS2")[0];
 				
-				document.getElementById('status').innerHTML		= _status.firstChild.nodeValue;
-				if (document.getElementById('status').innerHTML == "stopped")
+				document.getElementById('dhcp_status').innerHTML		= _status.firstChild.nodeValue;
+				if (document.getElementById('dhcp_status').innerHTML == "stopped")
 				{
 					return;
 				}
+
 				document.getElementById('interface').innerHTML	= _ifname.firstChild.nodeValue;
 				document.getElementById('start').innerHTML		= _start.firstChild.nodeValue;
 				document.getElementById('end').innerHTML		= _end.firstChild.nodeValue;

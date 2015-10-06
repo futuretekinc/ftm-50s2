@@ -7,7 +7,7 @@
 			<tbody>
 				<tr>
 					<td class='title right' id='title_dhcp_status'>Status: </td>
-					<td class='left'><p id='status'></p></td>
+					<td class='left'><p id='dhcp_status'></p></td>
 				</tr>
 				<tr>
 					<td class='title right' id='title_interface'>Interface: </td>
