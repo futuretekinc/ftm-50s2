@@ -1,0 +1,44 @@
+body
+{
+    background:		rgb(255,255,255);
+    margin:		0px;
+    padding:		0px;
+	font-size:		9pt;
+}
+
+div
+{
+    display:		inline;
+    float:		left;
+    margin:		0px;
+    padding:		0px;
+}
+
+#main_box
+{
+    position:		absolute;
+    left:		50%;
+    top:		50%;
+    margin:		-150px 0px 0px -200px;
+    width:		400px;
+    height:		300px;
+    box-shadow:		3px 3px 6px rgb(0,0,0);
+}
+
+#title
+{
+    background:		rgb(0,150,200);
+    width:		400px;
+    height:		100px;
+    background:		no-repeat;
+    background-size:	400px 100px;
+    background-image:	url("../images/ci.jpg");
+}
+
+#contents
+{
+    background:		rgb(135,200,255);
+    width:		400px;
+    height:		200px;
+}
+

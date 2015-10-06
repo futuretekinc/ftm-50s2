@@ -1,0 +1,52 @@
+.blank0
+{
+    font-size:		0pt;
+    height:		77px;
+    width:		400px;
+}
+
+.blank1
+{
+    font-size:		0pt;
+    height:		5px;
+    width:		275px;
+}
+
+.str
+{
+    float:		left;
+    width:		70px;
+    height:		20px;
+    margin:		0px 0px 0px 40px;
+    text-align:		left;
+    vertical-align:	bottom;
+	line-height:	20px;
+    text-shadow:	2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.values
+{
+    float:		left;
+    width:		160px;
+    height:		20px;
+    border:		0px;
+    margin:		0px 0px 0px 5px;
+    padding:		0px;
+    box-shadow:		2px 2px 4px rgba(0,0,0,0.5);
+}
+
+#action
+{
+    float:		right;
+    width:		75px;
+    height:		45px;
+    margin:		0px 45px 0px 5px;
+    cursor:		pointer;
+    background:		no-repeat;
+    background-size:	75px 45px;
+    background-image:	url("../images/button.png");
+    text-align:		center;
+    vertical-align:	middle;
+    line-height:	45px;
+}
+
