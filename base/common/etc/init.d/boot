@@ -3,6 +3,42 @@
 BOOT=10
 STOP=98
 
+system_config() {
+    local cfg="$1"
+
+    local hostname conloglevel timezone
+
+    config_get hostname "$cfg" hostname 'OpenWrt'
+    echo "$hostname" > /proc/sys/kernel/hostname
+
+    config_get conloglevel "$cfg" conloglevel
+    config_get buffersize "$cfg" buffersize
+    [ -z "$conloglevel" -a -z "$buffersize" ] || dmesg ${conloglevel:+-n $conloglevel} ${buffersize:+-s $buffersize}
+    
+    config_get timezone "$cfg" timezone 'UTC'
+    echo "$timezone" > /tmp/TZ
+
+    if [ -x /sbin/syslogd ]; then
+        local log_ip log_size log_port log_type log_file
+        config_get log_ip "$cfg" log_ip 
+        config_get log_size "$cfg" log_size 16
+        config_get log_port "$cfg" log_port 514 
+        config_get log_type "$cfg" log_type circular
+        config_get log_file "$cfg" log_file "/var/log/messages"
+        if [ "$log_type" = "file" ]; then
+            syslogd -s $log_size -O $log_file ${log_ip:+-L -R ${log_ip}:${log_port}} -S
+        else
+            syslogd -C${log_size} ${log_ip:+-L -R ${log_ip}:${log_port}}
+        fi  
+    fi  
+    config_get klogconloglevel "$cfg" klogconloglevel
+    [ -x /sbin/klogd ] && klogd ${klogconloglevel:+-c $klogconloglevel}
+}
+
+apply_uci_config() {
+    sh -c '. /etc/functions.sh; include /lib/config; uci_apply_defaults'
+}
+
 start() {
 	if [ ! -d /proc ]; then
 		mkdir /proc	
@@ -34,6 +70,10 @@ start() {
 		mkdir /var/run
 		mkdir /var/spool
 	fi
+
+    	apply_uci_config
+    	config_load system
+    	config_foreach system_config system
 	
 	#   ---------------------------------------------
 	#   MDEV Support
@@ -87,7 +127,6 @@ start() {
 	echo -n " Populating devices            : "
 	mdev -s
 	status_out $? 0
-
 }
 
 stop() {

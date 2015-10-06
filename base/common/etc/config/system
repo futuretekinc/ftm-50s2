@@ -1,0 +1,7 @@
+config system
+   option hostname FTM-100S
+   option timezone UTC
+
+config rdate
+   option interface        wan
+
