@@ -1,5 +1,5 @@
 TARGET=mmc
-COMMON_APPS=busybox openssl iptables zlib openssh libpcap tcpdump lua libubox uci gmp strongswan
+COMMON_APPS=busybox openssl iptables zlib openssh libpcap tcpdump lua libubox uci gmp strongswan hotplug2 ntpclient
 
 all: build
 
