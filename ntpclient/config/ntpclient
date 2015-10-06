@@ -1,0 +1,23 @@
+  1 config ntpserver
+  2     option hostname 'kr.pool.ntp.org'
+  3     option port     '123'
+  4 
+  5 config ntpserver
+  6     option hostname '2.kr.pool.ntp.org'
+  7     option port     '123'
+  8 
+  9 config ntpserver
+ 10     option hostname '1.asia.pool.ntp.org'
+ 11     option port     '123'
+ 12 
+ 13 config ntpserver
+ 14     option hostname '3.asia.pool.ntp.org'
+ 15     option port     '123'
+ 16 
+ 17 config ntpdrift
+ 18     option freq     '0'
+ 19 
+ 20 config ntpclient
+ 21     option interval 600
+ 22     #option count   10
+ 23     option interface wan
