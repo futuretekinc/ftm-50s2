@@ -1,0 +1,18 @@
+--- a/include/linux/fs.h
++++ b/include/linux/fs.h
+@@ -1574,6 +1574,7 @@
+ 			  loff_t len);
+ 	int (*fiemap)(struct inode *, struct fiemap_extent_info *, u64 start,
+ 		      u64 len);
++	struct file *(*open)(struct dentry *, int flags, const struct cred *);
+ };
+ 
+ struct seq_file;
+@@ -1975,6 +1976,7 @@
+ extern long do_sys_open(int dfd, const char __user *filename, int flags,
+ 			int mode);
+ extern struct file *filp_open(const char *, int, int);
++extern struct file *vfs_open(struct path *, int flags, const struct cred *);
+ extern struct file * dentry_open(struct dentry *, struct vfsmount *, int,
+ 				 const struct cred *);
+ extern int filp_close(struct file *, fl_owner_t id);

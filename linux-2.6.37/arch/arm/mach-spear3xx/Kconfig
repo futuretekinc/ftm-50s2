@@ -1,0 +1,81 @@
+#
+# SPEAr3XX Machine configuration file
+#
+
+if ARCH_SPEAR3XX
+
+menu "SPEAr3xx Implementations"
+config MACH_SPEAR300_EVB
+	bool "SPEAr300 Evaluation Board"
+	select CPU_SPEAR300
+	help
+	  Supports ST SPEAr300 Evaluation Board
+
+config MACH_SPEAR310_EVB
+	bool "SPEAr310 Evaluation Board"
+	select CPU_SPEAR310
+	help
+	  Supports ST SPEAr310 Evaluation Board
+
+config MACH_SPEAR320_EVB
+	bool "SPEAr320 Evaluation Board"
+	select CPU_SPEAR320
+	help
+	  Supports ST SPEAr320 Evaluation Board
+
+config MACH_SPEAR320_HMI
+	bool "SPEAr320 Human Machine Interface Board (HMI)"
+	select CPU_SPEAR320
+	help
+	  Supports ST SPEAr320 Human Machine Interface Board
+
+config MACH_SPEAR320_FTM
+	bool "FutureTek M2M Broker FTM-50S"
+	select CPU_SPEAR320
+	help
+	  Supports FutureTek M2M Broker FTMB-S1 Board
+
+
+if MACH_SPEAR320_FTM
+choice 
+	prompt "FTM-50S options"
+	default MACH_FTM50S_GEN
+
+config MACH_FTM_50S2
+	bool "Version 2.0"
+	help
+	  Supports FutureTek M2M Broker v2.0 Board
+
+config MACH_FTM50S_GEN
+	bool "FTM-50S Genenal Edition"
+
+config MACH_FTM50S_FS
+	bool "FTM-50S for Future Systems M2M"
+	help
+		Supports for Future Systems M2M
+config MACH_FTM50S_TP
+	bool "FTM-50S with ThingPlus"
+	help
+		Supports for Daliworks ThingPlus
+endchoice 
+endif
+
+endmenu
+
+
+config CPU_SPEAR300
+	bool "SPEAr300"
+	help
+	  Supports ST SPEAr300 Machine
+
+config CPU_SPEAR310
+	bool "SPEAr310"
+	help
+	  Supports ST SPEAr310 Machine
+
+config CPU_SPEAR320
+	bool "SPEAr320"
+	help
+	  Supports ST SPEAr320 Machine
+
+endif #ARCH_SPEAR3XX

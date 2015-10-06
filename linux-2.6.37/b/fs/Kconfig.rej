@@ -1,0 +1,10 @@
+--- a/fs/Kconfig
++++ b/fs/Kconfig
+@@ -64,6 +64,7 @@
+ 
+ source "fs/autofs4/Kconfig"
+ source "fs/fuse/Kconfig"
++source "fs/overlayfs/Kconfig"
+ 
+ config CUSE
+ 	tristate "Character device in Userspace support"

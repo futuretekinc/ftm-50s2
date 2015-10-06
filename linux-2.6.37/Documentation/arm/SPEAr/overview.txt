@@ -1,0 +1,80 @@
+			SPEAr ARM Linux Overview
+			==========================
+
+Introduction
+------------
+
+  SPEAr (Structured Processor Enhanced Architecture).
+  weblink : http://www.st.com/spear
+
+  The ST Microelectronics SPEAr range of ARM9/CortexA9 System-on-Chip CPUs are
+  supported by the 'spear' platform of ARM Linux. Currently SPEAr300,
+  SPEAr310, SPEAr320, SPEAr600, SPEAr1300 and SPEAr1310 SOCs are supported.
+  SPEAr3XX and SPEAr6XX are based on ARM9 whereas SPEAr13XX is based on latest
+  ARM Cortex A9 CPUs.
+
+  Hierarchy in SPEAr is as follows:
+
+  SPEAr (Platform)
+	- SPEAr3XX (3XX SOC series, based on ARM9)
+		- SPEAr300 (SOC)
+			- SPEAr300_EVB (Evaluation Board)
+		- SPEAr310 (SOC)
+			- SPEAr310_EVB (Evaluation Board)
+		- SPEAr320 (SOC)
+			- SPEAr320_EVB (Evaluation Board)
+	- SPEAr6XX (6XX SOC series, based on ARM9)
+		- SPEAr600 (SOC)
+			- SPEAr600_EVB (Evaluation Board)
+	- SPEAr13XX (13XX SOC series, based on ARM CORTEXA9)
+		- SPEAr1300 (SOC)
+			- SPEAr1300_EVB (Evaluation Board)
+		- SPEAr1310 (SOC)
+			- SPEAr1310_EVB (Evaluation Board)
+		- SPEAr900 (SOC)
+			- SPEAr900_EVB (Evaluation Board)
+
+  Configuration
+  -------------
+
+  A generic configuration is provided for each machine family, and can be used as the
+  default by
+	#make ARCH=arm spear13xx_defconfig
+	#make ARCH=arm spear3xx_defconfig
+	#make ARCH=arm spear6xx_defconfig
+
+  Compilation
+  -----------
+
+  After applying default configuration, Linux kernel for SPEAr architecture
+  can be compiled as
+	#make ARCH=arm CROSS_COMPILE=arm-linux- uImage
+
+  Please note that ARCH and CROSS_COMPILE can be omitted in the command line
+  provided that they are properly defined in the shell variable environment:
+
+  export ARCH=arm
+  export CROSS_COMPILE=arm-ca9-linux-
+
+  Layout
+  ------
+
+  The common files for multiple machine families (SPEAr3XX, SPEAr6XX and
+  SPEAr13XX) are located in the platform code contained in arch/arm/plat-spear
+  with headers in plat/.
+
+  Each machine series have a directory with name arch/arm/mach-spear followed by
+  series name. Like mach-spear3xx, mach-spear6xx and mach-spear13xx.
+
+  Common file for machines of spear3xx family is mach-spear3xx/spear3xx.c, for
+  spear6xx is mach-spear6xx/spear6xx.c and similarly for spear13xx is
+  mach-spear13xx/spear13xx.c. mach-spear* also contain soc/machine
+  specific files, like spear300.c, spear310.c, spear320.c and spear600.c.
+  Board specific files for each machine type is also contained in mach-spear*
+  folder.
+
+
+  Document Author
+  ---------------
+
+  Viresh Kumar, Shiraz Hashim (c) 2010 ST Microelectronics

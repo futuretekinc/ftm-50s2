@@ -1,0 +1,12 @@
+--- a/include/linux/mount.h
++++ b/include/linux/mount.h
+@@ -121,6 +121,9 @@
+ 	}
+ }
+ 
++struct path;
++extern struct vfsmount *clone_private_mount(struct path *path);
++
+ extern struct vfsmount *do_kern_mount(const char *fstype, int flags,
+ 				      const char *name, void *data);
+ 

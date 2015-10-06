@@ -1,0 +1,10 @@
+--- a/fs/splice.c
++++ b/fs/splice.c
+@@ -1307,6 +1307,7 @@
+ 
+ 	return ret;
+ }
++EXPORT_SYMBOL(do_splice_direct);
+ 
+ static int splice_pipe_to_pipe(struct pipe_inode_info *ipipe,
+ 			       struct pipe_inode_info *opipe,
