@@ -669,4 +669,12 @@ strongswan-*/src/libcharon/plugins/unit_tester/Makefile
 strongswan-*/src/libhydra/plugins/attr/Makefile
 strongswan-*/src/libhydra/plugins/attr_sql/Makefile
 strongswan-*/src/libhydra/plugins/resolve/Makefile
-
+strongswan-*/src/libhydra/attributes/attribute_manager.lo
+strongswan-*/src/libhydra/attributes/attributes.lo
+strongswan-*/src/libhydra/attributes/mem_pool.lo
+strongswan-*/src/libhydra/plugins/attr/attr_plugin.lo
+strongswan-*/src/libhydra/plugins/attr/attr_provider.lo
+strongswan-*/src/libhydra/plugins/attr/libstrongswan-attr.la
+strongswan-*/src/libhydra/plugins/resolve/libstrongswan-resolve.la
+strongswan-*/src/libhydra/plugins/resolve/resolve_handler.lo
+strongswan-*/src/libhydra/plugins/resolve/resolve_plugin.lo
