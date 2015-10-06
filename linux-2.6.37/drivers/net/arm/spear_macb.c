@@ -227,7 +227,19 @@ static void __init macb_get_hwaddr(struct macb *bp)
 
 static int macb_mdio_read(struct mii_bus *bus, int mii_id, int regnum)
 {
-#if ! CONFIG_MACH_FTM_50S2
+#if CONFIG_MACH_FTM_50S2
+	switch(regnum)
+	{
+	case	0:	return	0x3100;
+	case	1:	return	0x786D;
+	case	2:	return	(mii_id == 0)?0x0141:0xFFFF;
+	case	3:	return	(mii_id == 0)?0x0c87:0xFFFF;
+	case	4:	return	0x01E1;
+	case	5:	return	0xCDE1;	
+	case	6:	return	0x000F;	
+		break;
+	}
+#else
 	int value;
 	struct macb *bp;
 	struct macb_base_data *pdata;
@@ -251,16 +263,6 @@ static int macb_mdio_read(struct mii_bus *bus, int mii_id, int regnum)
 	value = MACB_BFEXT(DATA, macb_readl(bp, MAN));
 
 	return value;
-#else
-	switch(regnum)
-	{
-	case	1:	return	0x784d;
-	case	2:	return	(mii_id == 0)?0x0141:0xFFFF;
-	case	3:	return	(mii_id == 0)?0x0c87:0xFFFF;
-	case	4:	return	0x8101;
-	case	5:	return	0x0000;	
-		break;
-	}
 #endif
 }
 
@@ -288,10 +290,8 @@ static int macb_mdio_write(struct mii_bus *bus, int mii_id, int regnum,
 	while (!MACB_BFEXT(IDLE, macb_readl(bp, NSR)))
 		cpu_relax();
 
-	return 0;
-#else
-	return	0;
 #endif
+	return 0;
 }
 
 static int macb_mdio_reset(struct mii_bus *bus)
@@ -356,7 +356,6 @@ static void macb_handle_link_change(struct net_device *dev)
 static int macb_mii_probe(struct net_device *dev)
 {
 	struct macb *bp = netdev_priv(dev);
-#if CONFIG_MACH_FTM_50S2
 	struct phy_device *phydev = NULL;
 	struct macb_base_data *pdata;
 	int phy_addr;
@@ -392,15 +391,12 @@ static int macb_mii_probe(struct net_device *dev)
 	/* mask with MAC supported features */
 	phydev->supported &= PHY_BASIC_FEATURES;
 	phydev->advertising = phydev->supported;
+
 	bp->link = 0;
 	bp->speed = 0;
 	bp->duplex = -1;
 	bp->phy_dev = phydev;
-#else
-	bp->link = 1;
-	bp->speed = SPEED_100;
-	bp->duplex = 1;
-#endif
+
 	return 0;
 }
 
@@ -1484,11 +1480,22 @@ static void macb_get_drvinfo(struct net_device *dev,
 	strcpy(info->driver, bp->pdev->dev.driver->name);
 }
 
+#if CONFIG_MACH_FTM_50S2
+static u32 macb_get_link(struct net_device *dev)
+{
+	return 1;
+}
+#endif
+
 static struct ethtool_ops macb_ethtool_ops = {
 	.get_settings = macb_get_settings,
 	.set_settings = macb_set_settings,
 	.get_drvinfo = macb_get_drvinfo,
+#if CONFIG_MACH_FTM_50S2
+	.get_link = macb_get_link,
+#else
 	.get_link = ethtool_op_get_link,
+#endif
 };
 
 static int macb_ioctl(struct net_device *dev, struct ifreq *rq, int cmd)
