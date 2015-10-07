@@ -24,9 +24,6 @@ gpio_start()
         config_get dir  "${section}" Direction
 	[ -z ${dir}  ] && return 0
 
-        echo "Name : $name"
-        echo "PORT : $port"
-        echo "DIR  : $dir"
         case "${dir}" in
                 "in" )
                         local polarity

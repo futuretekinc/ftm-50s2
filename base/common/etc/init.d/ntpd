@@ -25,7 +25,7 @@ start() {
 
 	if [ -z "$CONF_EXIST" ] ; then
 		ln -sf $CONF_FILE $CONF_LINK_FILE	
-	if 
+	fi 
 
         if [ ! -f $CONF_FILE ] ; then
                 config_load ntpd

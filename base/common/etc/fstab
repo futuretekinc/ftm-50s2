@@ -1,3 +1,1 @@
 /tmp      		/tmp            	tmpfs   size=2M         0 0
-usbfs			/proc/bus/usb		usbfs 	defaults		0 0
-debugfs			/sys/kernel/debug	debugfs	defaults		0 0

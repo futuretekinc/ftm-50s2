@@ -71,6 +71,8 @@ start() {
 		mkdir /var/spool
 	fi
 
+ 	grep -q debugfs /proc/filesystems && mount -t debugfs debugfs /sys/kernel/debug
+
     	apply_uci_config
     	config_load system
     	config_foreach system_config system
