@@ -1,1 +1,0 @@
-/opt/thingplus-gateway/device/config/local.js
