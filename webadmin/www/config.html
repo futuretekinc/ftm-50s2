@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+<title>FutureTek</title>
+<link href="styles/common.css" rel="stylesheet" type="text/css" />
+<link href="styles/config.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="scripts/alias.js"></script>
+<script type="text/javascript">
+<!--
+function send_data()
+{
+    document.config.submit();
+}
+-->
+</script>
+</head>
+
+<body>
+<div id="main_box">
+  <div id="title"></div>
+  <div id="contents">
+    <form name="config" method="get" action="cgi-bin/config.cgi">
+      <div class="blank0">&nbsp;</div>
+      <div id="action" onclick="send_data();" >Apply</div>
+      <div class="str">IP Address</div>
+      <div class="value_line">
+	<input class="values" name="ipaddr" type="text" value=""/>.
+	<input class="values" name="ipaddr" type="text" value=""/>.
+	<input class="values" name="ipaddr" type="text" value=""/>.
+	<input class="values" name="ipaddr" type="text" value=""/>
+      </div>
+      <div class="blank1">&nbsp;</div>
+      <div class="str">Netmask</div>
+      <div class="value_line">
+	<input class="values" name="netmask" type="text" value=""/>.
+	<input class="values" name="netmask" type="text" value=""/>.
+	<input class="values" name="netmask" type="text" value=""/>.
+	<input class="values" name="netmask" type="text" value=""/>
+      </div>
+      <div class="blank1">&nbsp;</div>
+      <div class="str">Gateway</div>
+      <div class="value_line">
+	<input class="values" name="gateway" type="text" value=""/>.
+	<input class="values" name="gateway" type="text" value=""/>.
+	<input class="values" name="gateway" type="text" value=""/>.
+	<input class="values" name="gateway" type="text" value=""/>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+
+</html>
