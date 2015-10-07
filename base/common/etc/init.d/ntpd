@@ -1,0 +1,50 @@
+#!/bin/sh /etc/rc.common
+
+START=60
+
+NTPD=`which ntpd`
+CONF_LINK_FILE="/etc/ntp.conf"
+CONF_FILE="/tmp/ntp.conf"
+
+check_server() {
+        local hostname
+        local port
+
+        config_get hostname $1 hostname
+        config_get port $1 port
+
+        echo "$hostname : $port"
+        [ -z "$hostname" ] && return
+
+        echo "server $hostname" >> $CONF_FILE
+}
+
+
+start() {
+	CONF_EXIST=`readlink $CONF_LINK_FILE`
+
+	if [ -z "$CONF_EXIST" ] ; then
+		ln -sf $CONF_FILE $CONF_LINK_FILE	
+	if 
+
+        if [ ! -f $CONF_FILE ] ; then
+                config_load ntpd
+                echo "" > $CONF_FILE
+                config_foreach check_server ntpserver
+        fi
+
+        NTPD_RUNNING=`ps  | grep $NTPD | grep -v grep`
+
+        echo $NPTD_RUNNING
+        if [ -z "$NTPD_RUNNING" ] ; then
+                logger starting ntpd
+                ntpd 2> /dev/null
+        fi
+}
+
+stop() {
+        logger stopping ntpclient
+        killall ntpclient
+
+	rm -f $CONF_FILE
+}

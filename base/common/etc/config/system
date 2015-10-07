@@ -1,5 +1,5 @@
 config system
-   option hostname FTM-100S
+   option hostname FTM-50S
    option timezone UTC
 
 config rdate

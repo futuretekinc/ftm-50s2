@@ -1,0 +1,34 @@
+config button 
+        option Name             factory_reset
+        option  Port            76
+        option  Direction       in
+        option  Polarity        low
+
+config led 
+        option  Name            led0g
+        option  Port            84
+        option  Direction       out
+        option  Polarity        high
+        option  Value           off
+
+config led
+        option  Name            led0r
+        option  Port            85
+        option  Direction       out
+        option  Polarity        high     
+        option  Value           off      
+
+config led
+        option  Name            led1g
+        option  Port            86
+        option  Direction       out
+        option  Polarity        high
+        option  Value           off
+
+config led
+        option  Name            led1r
+        option  Port            87
+        option  Direction       out
+        option  Polarity        high
+        option  Value           off
+

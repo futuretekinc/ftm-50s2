@@ -1,24 +1,17 @@
 #!/bin/sh /etc/rc.common
-# Start/stop the cron daemon.
+# Copyright (C) 2006 OpenWrt.org
+START=50
 
-START=60
+PATH="/bin:/sbin:/usr/bin:/usr/sbin"
 
-test -f /usr/sbin/cron || exit 0
-
-LSBNAMES='-l'  # Uncomment for LSB name support in /etc/cron.d/
-
-start()	 {
-	start-stop-daemon --start --quiet --pidfile /var/run/crond.pid \
-		--name cron --startas /usr/sbin/cron -- $LSBNAMES
+start () {
+        loglevel=$(uci_get "system.@system[0].cronloglevel")
+        [ -z "$(ls /etc/crontabs/)" ] && exit 1
+        mkdir -p /var/spool/cron
+        ln -s /etc/crontabs /var/spool/cron/ 2>/dev/null
+        crond -c /etc/crontabs -l ${loglevel:-5}
 }
 
-stop()	 {
-	start-stop-daemon --stop --quiet --pidfile /var/run/crond.pid --name cron
+stop() {
+        killall -9 crond
 }
-
-restart() {
-	start-stop-daemon --stop --retry 5 --quiet --pidfile /var/run/crond.pid --name cron
-    start-stop-daemon --start --quiet --pidfile /var/run/crond.pid \
-		--name cron --startas /usr/sbin/cron -- $LSBNAMES
-}
-

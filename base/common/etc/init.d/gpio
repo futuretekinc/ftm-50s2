@@ -1,0 +1,82 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006 OpenWrt.org
+START=10
+
+#   ---------------------------------------------
+#   Create GPIO Control Device
+#   arg1 : GPIO Port Number
+#   arg2 : Device Name
+#   arg3 : Direction
+#   ---------------------------------------------
+gpio_start()
+{
+        local section="$1"
+        local name
+        local port
+        local dir
+
+        config_get name "${section}" Name
+	[ -z ${name} ] && return 0
+
+        config_get port "${section}" Port
+	[ -z ${port} ] && return 0
+
+        config_get dir  "${section}" Direction
+	[ -z ${dir}  ] && return 0
+
+        echo "Name : $name"
+        echo "PORT : $port"
+        echo "DIR  : $dir"
+        case "${dir}" in
+                "in" )
+                        local polarity
+
+                        config_get polarity "${section}" Polarity "low"
+			[ -z ${polarity}  ] && return
+
+
+                        echo $port > /sys/class/gpio/export
+                        echo in > /sys/class/gpio/gpio$port/direction
+                        if [ "${polarity}" = "low" ]
+                        then
+                                echo 1 > /sys/class/gpio/gpio$port/active_low
+                        else
+                                echo 0 > /sys/class/gpio/gpio$port/active_low
+                        fi
+                        ln -s /sys/class/gpio/gpio$port/value /dev/${name}
+                        ;;
+
+                "out" )
+                        local polarity
+                        local value
+
+                        config_get polarity "${section}" Polarity "low"
+			[ -z ${polarity} ] && return
+
+                        config_get value    "${section}" Value "off"
+			[ -z ${value}  ] && return
+
+                        echo $port > /sys/class/gpio/export
+                        echo out > /sys/class/gpio/gpio$port/direction
+                        if [ "${polarity}" = "low" ]
+                        then
+                                echo 1 > /sys/class/gpio/gpio$port/active_low
+                        else
+                                echo 0 > /sys/class/gpio/gpio$port/active_low
+                        fi
+                        if [ "${value}" = "on" ]
+                        then
+                                echo 1 > /sys/class/gpio/gpio$port/value
+                        else
+                                echo 0 > /sys/class/gpio/gpio$port/value
+                        fi
+                        ln -s /sys/class/gpio/gpio$port/value /dev/${name}
+                ;;
+        esac
+}
+
+start () {
+        config_load gpio
+        config_foreach gpio_start button
+        config_foreach gpio_start led
+}

@@ -8,7 +8,7 @@ system_config() {
 
     local hostname conloglevel timezone
 
-    config_get hostname "$cfg" hostname 'OpenWrt'
+    config_get hostname "$cfg" hostname 'FTM-50S'
     echo "$hostname" > /proc/sys/kernel/hostname
 
     config_get conloglevel "$cfg" conloglevel
