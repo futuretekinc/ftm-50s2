@@ -10,7 +10,6 @@ APP=ntpclient
 VERSION=2010
 INSTALLDIR=${CURDIR}/_install
 BINDIR=${INSTALLDIR}/usr/sbin
-CONFIGDIR=${INSTALLDIR}/etc/config
 
 all: build install
 
@@ -24,9 +23,7 @@ install:
 	[ -d ${INSTALLDIR}/usr/sbin ] || mkdir -p ${BINDIR}
 
 	install -m 755 ${APP}-${VERSION}/${APP} ${BINDIR}/${APP}
+	cp -r config/* ${INSTALLDIR}/
 
-	[ -d ${INSTALLDIR}/etc/config ] || mkdir -p ${CONFIGDIR}
-
-	install -m 644 config/${APP} ${CONFIGDIR}/${APP}
 clean:
 	make -C ${APP}-${VERSION} clean
