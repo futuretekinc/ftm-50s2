@@ -25,6 +25,7 @@ configure:
 
 install:
 	make -C ${APP}-${VERSION} install DESTDIR=${INSTALLDIR}
+	cp -r ${CURDIR}/config/* ${INSTALLDIR}/
 
 clean:
 	make -C ${APP}-${VERSION} clean
