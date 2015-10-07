@@ -7,6 +7,7 @@ DEFAULT=/etc/default/$BIN
 LOG_D=/var/log/$BIN
 RUN_D=/var/run
 PID_F=$RUN_D/$BIN.pid
+OPTIONS="-h /www"
 
 start() {
         [ -f $DEFAULT ] && . $DEFAULT

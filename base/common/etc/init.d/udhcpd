@@ -2,6 +2,8 @@
 
 START=50
 
+UDHCPD=`which udhcpd`
+
 start() {
 	if ! pidof udhcpd | sed "s/$$\$//" | grep -q [0-9]
 	then
@@ -14,7 +16,7 @@ start() {
 			echo "" > /var/lib/misc/udhcpd.leases
 		fi
 
-		/sbin/udhcpd /etc/config/udhcpd &
+		$UDHCPD /etc/config/udhcpd &
 	fi	
 }
 

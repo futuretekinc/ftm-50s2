@@ -13,7 +13,6 @@ check_server() {
         config_get hostname $1 hostname
         config_get port $1 port
 
-        echo "$hostname : $port"
         [ -z "$hostname" ] && return
 
         echo "server $hostname" >> $CONF_FILE
@@ -21,30 +20,28 @@ check_server() {
 
 
 start() {
+        NTPD_RUNNING=`ps  | grep $NTPD | grep -v grep`
+        if [ -n "$NTPD_RUNNING" ] ; then
+		logger alrelay running
+	fi
+
 	CONF_EXIST=`readlink $CONF_LINK_FILE`
 
 	if [ -z "$CONF_EXIST" ] ; then
 		ln -sf $CONF_FILE $CONF_LINK_FILE	
 	fi 
 
-        if [ ! -f $CONF_FILE ] ; then
-                config_load ntpd
-                echo "" > $CONF_FILE
-                config_foreach check_server ntpserver
-        fi
+        config_load ntpd
+        echo "" > $CONF_FILE
+        config_foreach check_server ntpserver
 
-        NTPD_RUNNING=`ps  | grep $NTPD | grep -v grep`
-
-        echo $NPTD_RUNNING
-        if [ -z "$NTPD_RUNNING" ] ; then
-                logger starting ntpd
-                ntpd 2> /dev/null
-        fi
+        logger starting ntpd
+        ntpd 2> /dev/null
 }
 
 stop() {
-        logger stopping ntpclient
-        killall ntpclient
+        logger stopping ntpd
+        killall ntpd
 
 	rm -f $CONF_FILE
 }

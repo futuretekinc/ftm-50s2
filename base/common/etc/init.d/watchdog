@@ -3,9 +3,15 @@
 START=97
 
 start() {
-	. /etc/config/watchdog.conf
+	local	reset
+	local	timeout
+
+	config_load watchdog
+	config_get  reset   "watchdog" Reset	10
+	config_get  timeout "watchdog" Timeout 	60
+		
 	[ -c /dev/watchdog ] && [ -x /sbin/watchdog ] && [ -x /bin/nice ] && \
-    	/bin/nice -n -20 /sbin/watchdog -t $WATCHDOG_TIMEOUT -T 300 /dev/watchdog
+    	/bin/nice -n -20 /sbin/watchdog -t $reset -T $timeout /dev/watchdog
 }
 
 stop() {

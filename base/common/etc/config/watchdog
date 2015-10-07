@@ -1,0 +1,3 @@
+config watchdog
+	option	Reset	5
+	option	Timeout	300
