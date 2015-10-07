@@ -1,0 +1,10 @@
+#!/bin/sh
+usecrosscomplie='define'
+targethost='192.168.1.10'
+targetuser='root'
+targetarch='arm-linux'
+cc='armv5-linux-gcc'
+usrinc='/opt/STM/STLinux-2.4/devkit/armv5/include'
+incpth='/opt/STM/STLinux-2.4/devkit/armv5/include'
+libpth='/opt/STM/STLinux-2.4/devkit/armv5/lib'
+targetdir='/home/xtra/work/ftm-50s2/perl/_install/usr'

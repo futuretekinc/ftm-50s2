@@ -1,0 +1,23 @@
+#!/bin/sh
+env=''
+case "$1" in
+-cwd)
+  shift
+  cwd=$1
+  shift
+  ;;
+esac
+case "$1" in
+-env)
+  shift
+  env=$1
+  shift
+  ;;
+esac
+case "$cwd" in
+'') cwd=/home/xtra/work/ftm-50s2/perl/_install/usr ;;
+esac
+exe=$1
+shift
+/home/xtra/work/ftm-50s2/perl/perl-5.22.0/Cross/to-scp $exe
+ssh -p 22 -l root 192.168.1.10 "cd $cwd && $env $exe $@"

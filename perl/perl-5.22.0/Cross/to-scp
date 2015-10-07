@@ -1,0 +1,15 @@
+#!/bin/sh
+for f in $@
+do
+  case "$f" in
+  /*)
+    /home/xtra/work/ftm-50s2/perl/perl-5.22.0/Cross/mkdir `dirname $f`
+    scp -P 22 -r -q $f root@192.168.1.10:$f           2>/dev/null  || exit 1
+    ;;
+  *)
+    /home/xtra/work/ftm-50s2/perl/perl-5.22.0/Cross/mkdir /home/xtra/work/ftm-50s2/perl/_install/usr/`dirname $f`
+    scp -P 22 -r -q $f root@192.168.1.10:/home/xtra/work/ftm-50s2/perl/_install/usr/$f 2>/dev/null || exit 1
+    ;;
+  esac
+done
+exit 0
