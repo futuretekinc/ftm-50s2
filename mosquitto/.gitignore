@@ -1,0 +1,6 @@
+mosquitto-*/client/mosquitto_pub
+mosquitto-*/client/mosquitto_sub
+mosquitto-*/lib/cpp/libmosquittopp.so.1
+mosquitto-*/lib/libmosquitto.so.1
+mosquitto-*/src/mosquitto
+mosquitto-*/src/mosquitto_passwd
