@@ -3,32 +3,82 @@
 START=50
 
 UDHCPD=`which udhcpd`
+UDHCPD_CONF="/tmp/udhcpd.conf"
+
+add_dns() {
+    local dns
+
+    config_get host $1 host
+    echo "opt dns    $host"         >> $UDHCPD_CONF
+}
+
+create_conf() {
+    local interface
+    local start_ip
+    local end_ip
+    local router
+    local subnet
+    local lease
+
+    echo "# Auto generated" > $UDHCPD_CONF
+    echo "# Values shown are defaults"
+
+    config_get start_ip  $1 start
+    config_get end_ip    $1 end
+    echo "# The start and end of the IP lease block"
+    echo ""	>> $UDHCPD_CONF
+    echo "start          $start_ip"  >> $UDHCPD_CONF
+    echo "end            $end_ip"    >> $UDHCPD_CONF
+
+    config_get interface $1 interface
+    if [ -n $interface ] ; then
+        echo ""	>> $UDHCPD_CONF
+        echo "# The interface that udhcpd will use" >> $UDHCPD_CONF
+        echo ""	>> $UDHCPD_CONF
+        echo "interface      $interface" >> $UDHCPD_CONF
+    fi
+
+    echo "" >> $UDHCPD_CONF
+    echo "# Static leases map" >> $UDHCPD_CONF
+    echo "" >> $UDHCPD_CONF
+    config_get router    $1 router
+    [ -n $router ] && echo "opt router     $router"    >> $UDHCPD_CONF
+    config_get subnet    $1 subnet
+    [ -n $subnet ] && echo "opt subnet     $subnet"    >> $UDHCPD_CONF
+    config_get lease     $1 lease
+    [ -n $lease ] && echo "opt lease      $lease"     >> $UDHCPD_CONF
+
+    config_foreach add_dns dns
+}
 
 start() {
-	if ! pidof udhcpd | sed "s/$$\$//" | grep -q [0-9]
-	then
-		if [ ! -f /var/lib/misc/udhcpd.leases ]; then
-			
-			if [ ! -d /var/lib/misc ]; then
-				mkdir -p /var/lib/misc
-			fi
+    if ! pidof udhcpd | sed "s/$$\$//" | grep -q [0-9]
+    then
+        config_load udhcpd
+        config_foreach create_conf server
+    
+        if [ ! -f /var/lib/misc/udhcpd.leases ]; then
+            
+            [ -d /var/lib/misc ] || mkdir -p /var/lib/misc
+            echo "" > /var/lib/misc/udhcpd.leases
+        fi
 
-			echo "" > /var/lib/misc/udhcpd.leases
-		fi
+        LINK=`readlink /etc/udhcpd.conf`
+        [ -z $LINK ] && ln -s $UDHCPD_CONF /etc/udhcpd.conf
 
-		$UDHCPD /etc/config/udhcpd &
-	fi	
+        $UDHCPD /etc/udhcpd.conf &
+    fi    
 }
 
 stop() {
-	pkill udhcpd
+    pkill udhcpd
 }
 
 status() {
-	if pidof udhcpd | sed "s/$$\$//" | grep -q [0-9]
-	then
-		echo "running"
-	else
-		echo "stopped"
-	fi
+    if pidof udhcpd | sed "s/$$\$//" | grep -q [0-9]
+    then
+        echo "running"
+    else
+        echo "stopped"
+    fi
 }

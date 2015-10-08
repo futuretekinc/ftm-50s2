@@ -11,11 +11,11 @@ boot() {
 		case $x in
 			model=*)
 				MODEL="${x#model=}"
-				echo $MODEL > /var/model
+				echo $MODEL > /var/lib/misc/model
 			;;
 			devid=*)
 				DEVID="${x#devid=}"
-				echo $DEVID > /var/devid
+				echo $DEVID > /var/lib/misc/devid
 			;;
 		esac
 	done

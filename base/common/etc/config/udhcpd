@@ -1,8 +1,8 @@
-config udhcp
-	option Interface	eth1
-	option Start		192.168.1.20
+config server
+	option start		192.168.1.20
 	option end		192.168.1.254
-	option route		192.168.1.1
+	option interface	eth1
+	option router		192.168.1.1
 	option subnet		255.255.255.0
 	option lease		864000		# default: 10 days
 
