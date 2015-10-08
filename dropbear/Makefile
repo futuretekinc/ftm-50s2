@@ -7,7 +7,10 @@ export STRIP=${CROSS}strip
 
 APP=dropbear
 VERSION=2015.68
-INSTALLDIR=${CURDIR}/_install
+DESTDIR=${CURDIR}/_install
+CONFIGDIR=/etc/config
+INITDDIR=/etc/init.d
+RCDDIR=/etc/rc.d
 
 all: build install
 
@@ -35,7 +38,14 @@ configure:
 		CC=${CC} 
 
 install:
-	make -C ${APP}-${VERSION} install DESTDIR=${INSTALLDIR}
+	make -C ${APP}-${VERSION} install DESTDIR=${DESTDIR}
+	[ -d ${DESTDIR}${CONFIGDIR} ] || mkdir -p ${DESTDIR}${CONFIGDIR}
+	install -m 644 config/config_dropbear ${DESTDIR}${CONFIGDIR}/${APP}
+	[ -d ${DESTDIR}${INITDDIR} ] || mkdir -p ${DESTDIR}${INITDDIR}
+	install -m 755 config/initd_dropbear ${DESTDIR}${INITDDIR}/${APP}
+	[ -d ${DESTDIR}${RCDDIR} ] || mkdir -p ${DESTDIR}${RCDDIR}
+	cd ${DESTDIR}${RCDDIR}; ln -sf ${INITDDIR}/${APP} S50${APP};ln -sf ${INITDDIR}/${APP} K50${APP};
+
 
 clean:
 	make -C ${APP}-${VERSION} clean

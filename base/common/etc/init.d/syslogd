@@ -1,11 +1,11 @@
 #!/bin/sh /etc/rc.common
 
-BOOT=22
+START=22
 
 start() {
 	if ! pidof syslogd | sed "s/$$\$//" | grep -q [0-9]
 	then
-		syslogd -f /etc/config/syslogd.conf
+		syslogd -f /etc/syslogd.conf
 		klogd -c 1
 	fi  
 }

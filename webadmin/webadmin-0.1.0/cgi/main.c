@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 	FTMC_COMMAND	*pCmd = &cmds[0];
 	while(pCmd->lpszName != NULL)
 	{
-		if (strcmp(pCmd->lpszName, argv[0]) == 0)
+		if (strcmp(pCmd->lpszName, argv[0][13]) == 0)
 		{
 			break;
 		}
