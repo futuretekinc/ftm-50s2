@@ -1,0 +1,4 @@
+config httpd
+	option home	"/www"
+
+

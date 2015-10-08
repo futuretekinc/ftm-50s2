@@ -1,0 +1,53 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006 OpenWrt.org
+START=50
+
+BIN=httpd
+HTTPD_CONF="/tmp/httpd.conf"
+WEBADMIN_CONF="/tmp/webadmin.conf"
+HTTPD_CONF_LINK="/etc/httpd.conf"
+WEBADMIN_CONF_LINK="/etc/webadmin.conf"
+
+create_httpd_conf() {
+	local home
+	config_get home $1 home
+
+	echo "# Auto-generated" > $HTTPD_CONF
+	[ -n $home ] && echo "H:$home" >> $HTTPD_CONF
+
+	LINK=`readlink $HTTPD_CONF_LINK`
+	[ -z $LINK ] && ln -sf $HTTPD_CONF $HTTPD_CONF_LINK
+}
+
+create_webadmin_conf() {
+	local location
+	local userid
+	local password
+	local timeout
+
+	echo "# Auto-generated" > $WEBADMIN_CONF
+	config_get location $1 location
+	config_get userid $1 userid
+	config_get password $1 password
+	config_get timeout $1 timeout
+
+	[ -n $home ] && echo "location:$location" >> $WEBADMIN_CONF
+	[ -n $home ] && echo "userid:$userid" >> $WEBADMIN_CONF
+	[ -n $home ] && echo "password:$password" >> $WEBADMIN_CONF
+	[ -n $home ] && echo "timeout:$timeout" >> $WEBADMIN_CONF
+
+	LINK=`readlink $WEBADMIN_CONF_LINK`
+	[ -z $LINK ] && ln -sf $WEBADMIN_CONF $WEBADMIN_CONF_LINK
+}
+
+start() {
+	config_load webadmin
+	config_foreach create_httpd_conf httpd
+
+        $BIN -c $HTTPD_CONF_LINK
+}
+
+stop() {
+        [ -f $PID_F ] && kill $(cat $PID_F)
+}
+
