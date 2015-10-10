@@ -1,5 +1,5 @@
-/iptables-1.4.21/iptables/iptables-apply.8
-/iptables-1.4.21/iptables/iptables-restore.8
-/iptables-1.4.21/iptables/iptables-save.8
-/iptables-1.4.21/iptables/iptables-xml.1
+/iptables-*/iptables/iptables-apply.8
+/iptables-*/iptables/iptables-restore.8
+/iptables-*/iptables/iptables-save.8
+/iptables-*/iptables/iptables-xml.1
 
