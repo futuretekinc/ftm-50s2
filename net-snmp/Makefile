@@ -29,6 +29,7 @@ configure:
 			--with-defaults \
 			--with-endianness=little \
 			--disable-embedded-perl \
+			--disable-manuals \
 			--without-perl-modules \
 			--with-default-snmp-version="2" \
 			--with-sys-contact="@@no.where" \
