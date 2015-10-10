@@ -1,11 +1,89 @@
+#
+# NOTE! Don't add files that are generated in specific
+# subdirectories here. Add them in the ".gitignore" file
+# in that subdirectory instead.
+#
+# NOTE! Please use 'git ls-files -i --exclude-standard'
+# command after changing this file, to see if there are
+# any tracked files which get ignored after the change.
+#
+# Normal rules
+#
+.*
+*.o
+*.o.*
+*.a
+*.s
+*.ko
+*.so
+*.so.dbg
+*.mod.c
+*.i
+*.lst
+*.symtypes
+*.order
+modules.builtin
+*.elf
+*.bin
+*.gz
+*.bz2
+*.lzma
+*.lzo
+*.patch
+*.gcno
+*.img
+
+System.map
+tags
+
+#
+# Top-level generic files
+#
+/tags
+/TAGS
+/Module.markers
+/Module.symvers
+
+#
+# git files that we don't want to ignore even it they are dot-files
+#
+!.gitignore
+#
+# Generated include files
+#
+include/config
+include/generated
+
+# stgit generated dirs
+patches-*
+_install
+
+# quilt's files
+patches
+series
+
+# cscope files
+cscope.*
+ncscope.*
+
+# gnu global files
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+
+*.orig
+*~
+\#*#
+
 *.lo
-zlib-1.2.8/example
-zlib-1.2.8/example64
-zlib-1.2.8/examplesh
-zlib-1.2.8/libz.so.1.2.8
-zlib-1.2.8/minigzip
-zlib-1.2.8/minigzip64
-zlib-1.2.8/minigzipsh
-zlib-1.2.8/Makefile
-zlib-1.2.8/configure.log
-zlib-1.2.8/*.pc
+zlib-*/example
+zlib-*/example64
+zlib-*/examplesh
+zlib-*/libz.so.*
+zlib-*/minigzip
+zlib-*/minigzip64
+zlib-*/minigzipsh
+zlib-*/Makefile
+zlib-*/configure.log
+zlib-*/*.pc
