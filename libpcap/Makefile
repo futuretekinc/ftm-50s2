@@ -1,30 +1,38 @@
+export HOST=arm-linux
 export CROSS=armv5-linux-
 export CC=${CROSS}gcc
 export AR=${CROSS}ar
 export LD=${CROSS}ld
 export AS=${CROSS}as
 export STRIP=${CROSS}strip
+export PREFIX=/usr
+export DESTDIR=${CURDIR}/_install
 
 APP=libpcap
 VERSION=1.7.4
-INSTALLDIR=${CURDIR}/_install
 
-all: build install
+all: check configure build install
+
+check:
+	[ -d ${APP}-${VERSION} ] || tar xvfz ../dl/${APP}-${VERSION}.tar.gz
 
 build:
 	make -C ${APP}-${VERSION} 
 
 configure:
-	cd ${APP}-${VERSION}; \
-	./configure --host=arm-linux \
-		--with-pcap=linux \
-		ac_cv_linux_vers=2 \
-		--prefix=/usr \
-		CC=${CC} \
-		AR=${AR} 
+	if [ ! -f .configured ] ; then \
+		(cd ${APP}-${VERSION}; \
+			./configure --host=${HOST} \
+				--with-pcap=linux \
+				ac_cv_linux_vers=2 \
+				--prefix=${PREFIX} \
+				CC=${CC} \
+				AR=${AR});\
+		echo "yes" > .configured; \
+	fi;
 
 install:
-	make -C ${APP}-${VERSION} install DESTDIR=${INSTALLDIR} 
+	make -C ${APP}-${VERSION} install 
 
 clean:
 	make -C ${APP}-${VERSION} clean

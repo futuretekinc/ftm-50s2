@@ -1,3 +1,4 @@
+export HOST=arm-linux
 export CROSS=armv5-linux-
 export CC=${CROSS}gcc
 export CXX=${CROSS}g++
@@ -13,7 +14,10 @@ APP=mosquitto
 VERSION=1.4.4
 INSTALLDIR=${CURDIR}/_install
 
-all: build install
+all: check build install
+
+check:
+	[ -d ${APP}-${VERSION} ] || tar xvfz ${APP}-${VERSION}.tar.gz
 
 build:
 	make -C ${APP}-${VERSION} \

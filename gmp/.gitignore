@@ -120,6 +120,7 @@ gmp-*/tests/mpf/Makefile
 gmp-*/tests/mpq/Makefile
 gmp-*/tests/mpz/Makefile
 gmp-*/tests/rand/Makefile
+gmp-*/tests/t-*
 gmp-*/trialdivtab.h
 gmp-*/tune/Makefile
 gmp-*/tune/sqr_basecase.c

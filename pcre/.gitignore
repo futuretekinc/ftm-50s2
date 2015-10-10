@@ -1,4 +1,3 @@
-
 #
 # NOTE! Don't add files that are generated in specific
 # subdirectories here. Add them in the ".gitignore" file
@@ -10,98 +9,6 @@
 #
 # Normal rules
 #
-.*
-*.o
-*.o.*
-*.a
-*.s
-*.ko
-*.so
-*.so.dbg
-*.mod.c
-*.i
-*.lst
-*.symtypes
-*.order
-modules.builtin
-*.elf
-*.bin
-*.gz
-*.bz2
-*.lzma
-*.lzo
-*.patch
-*.gcno
-*.img
 
-System.map
-tags
-
-#
-# Top-level generic files
-#
-/tags
-/TAGS
-/Module.markers
-/Module.symvers
-
-#
-# git files that we don't want to ignore even it they are dot-files
-#
-!.gitignore
-#
-# Generated include files
-#
-include/config
-include/generated
-
-# stgit generated dirs
-patches-*
+pcre-*
 _install
-
-# quilt's files
-patches
-series
-
-# cscope files
-cscope.*
-ncscope.*
-
-# gnu global files
-GPATH
-GRTAGS
-GSYMS
-GTAGS
-
-*.orig
-*~
-\#*#
-
-*.lo
-*.pc
-*.la
-pcre-*/Makefile
-pcre-*/config.h
-pcre-*/config.log
-pcre-*/config.status
-pcre-*/libpcre.la
-pcre-*/libpcre.pc
-pcre-*/libpcre16.pc
-pcre-*/libpcre32.pc
-pcre-*/libpcrecpp.la
-pcre-*/libpcrecpp.pc
-pcre-*/libpcreposix.la
-pcre-*/libpcreposix.pc
-pcre-*/libtool
-pcre-*/pcre-config
-pcre-*/pcre.h
-pcre-*/pcre_chartables.c
-pcre-*/pcre_scanner_unittest
-pcre-*/pcre_stringpiece.h
-pcre-*/pcre_stringpiece_unittest
-pcre-*/pcrecpp_unittest
-pcre-*/pcrecpparg.h
-pcre-*/pcregrep
-pcre-*/pcretest
-pcre-*/stamp-h1
-

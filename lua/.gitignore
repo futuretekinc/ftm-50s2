@@ -76,15 +76,16 @@ GTAGS
 *~
 \#*#
 
-dropbear-*/dbclient
-dropbear-*/dropbear
-dropbear-*/dropbearconvert
-dropbear-*/dropbearkey
-dropbear-*/scp
-dropbear-*/config.log
-dropbear-*/config.status
-dropbear-*/Makefile
-dropbear-*/config.h
-dropbear-*/libtomcrypt/Makefile
-dropbear-*/libtommath/Makefile
+Makefile
+CMakeCache.txt
+CMakeFiles
+*.cmake
+*.o
+*.a
+*.so
+*.dylib
+install_manifest.txt
 
+uci
+uci_config.h
+test/save

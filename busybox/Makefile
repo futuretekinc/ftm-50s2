@@ -3,12 +3,15 @@ export CC=${CROSS}gcc
 export AR=${CROSS}ar
 export LD=${CROSS}ld
 export AS=${CROSS}as
+export DESTDIR=${CURDIR}/_install
 
 APP=busybox
 VERSION=1.23.2
-INSTALLDIR=${CURDIR}/_install
 
-all: build install
+all: check build install
+
+check:
+	[ -d ${APP}-${VERSION} ] || tar xvfj ${APP}-${VERSION}.tra.bz2
 
 build:
 	make -C ${APP}-${VERSION} CC=${CC}

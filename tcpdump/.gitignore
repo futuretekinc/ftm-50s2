@@ -33,6 +33,7 @@ modules.builtin
 *.gcno
 *.img
 
+.confiugred
 System.map
 tags
 
