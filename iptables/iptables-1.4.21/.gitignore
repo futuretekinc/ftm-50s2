@@ -9,7 +9,6 @@
 Makefile
 
 /include/xtables-version.h
-/include/iptables/internal.h
 
 /autom4te.cache/
 /libtool
