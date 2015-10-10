@@ -76,8 +76,5 @@ GTAGS
 *~
 \#*#
 
-/iptables-*/iptables/iptables-apply.8
-/iptables-*/iptables/iptables-restore.8
-/iptables-*/iptables/iptables-save.8
-/iptables-*/iptables/iptables-xml.1
+iptables-*
 

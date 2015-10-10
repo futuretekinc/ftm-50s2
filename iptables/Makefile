@@ -7,9 +7,12 @@ export STRIP=${CROSS}strip
 
 APP=iptables
 VERSION=1.4.21
-INSTALLDIR=${CURDIR}/_install
+DESTDIR=${CURDIR}/_install
 
-all: build install
+all: check build install
+
+check:
+	[ -d ${APP}-${VERSION} ] || tar xvfj ../dl/${APP}-${VERSION}.tar.bz2
 
 build:
 	make -C ${APP}-${VERSION} CC=${CC}
@@ -18,7 +21,7 @@ configure:
 	cd ${APP}-${VERSION}; ./configure --host=arm-linux --prefix=/usr --disable-ipv6 CC=${CC}
 
 install:
-	make -C ${APP}-${VERSION} install DESTDIR=${INSTALLDIR}
+	make -C ${APP}-${VERSION} install DESTDIR=${DESTDIR}
 
 clean:
 	make -C ${APP}-${VERSION} clean
