@@ -1,0 +1,1 @@
+/opt/thingplus-gateway/device/update/ftm-50/files/node-config_local.js
