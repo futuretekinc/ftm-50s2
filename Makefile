@@ -1,5 +1,5 @@
 TARGET=mmc
-COMMON_APPS=busybox openssl iptables zlib openssh libpcap tcpdump lua libubox uci gmp strongswan hotplug2 ntpclient dropbear pcre lighttpd webadmin net-snmp mosquitto
+COMMON_APPS=busybox openssl iptables zlib openssh libpcap tcpdump lua libubox uci gmp strongswan hotplug2 ntpclient dropbear pcre lighttpd webadmin net-snmp mosquitto tpgw
 
 all: build
 
@@ -19,16 +19,6 @@ target_gen:
 	cp -r base/common/* ${TARGET}/
 	tools/make_dev ${TARGET};
 	for app in $(COMMON_APPS); do \
-		cp -r $$app/_install/* ${TARGET}/; \
-	done
-
-target_tpgw:
-	rm -rf ${TARGET}/*;
-	tools/make_target ${TARGET};
-	cp -r base/common/* ${TARGET}/;
-	cp -r base/tpgw/* ${TARGET}/;
-	tools/make_dev ${TARGET};
-	for app in $(cOMMON_APPS); do \
 		cp -r $$app/_install/* ${TARGET}/; \
 	done
 

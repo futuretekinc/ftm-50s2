@@ -25,7 +25,13 @@ build:
 configure:
 	if [ ! -f .configured ] ; then \
 		(cd ${APP}-${VERSION};\
-		./configure --host=${HOST} --prefix=${PREFIX} --enable-shared --without-mysql --without-zlib --without-bzip2 --disable-ipv6 \
+		./configure --host=${HOST} \
+			--prefix=${PREFIX} \
+			--enable-shared \
+			--without-mysql \
+			--without-zlib \
+			--without-bzip2 \
+			--disable-ipv6 \
 			PCRECONFIG=${CURDIR}/${PCREDIR}/usr/bin/pcre-config \
 			PCRE_LIB=${CURDIR}/${PCREDIR}/usr/lib/libpcre.a \
 			LIBS=-L${CURDIR}/${PCREDIR}/usr/lib \
