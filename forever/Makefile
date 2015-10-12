@@ -17,3 +17,6 @@ install:
 	cp -r ${APP}${VERSION}/* ${DESTDIR}/usr/
 
 clean:
+
+distclean:
+	$(call distclean_package,${APP}${VERSION})

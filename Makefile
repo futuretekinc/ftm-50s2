@@ -26,3 +26,9 @@ clean:
 	for app in $(APPS); do \
 		make -C $$app clean; \
 	done
+
+distclean:
+	for app in $(APPS); do \
+		make -C $$app distclean; \
+	done
+

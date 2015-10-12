@@ -36,3 +36,6 @@ install:
 clean:
 	make -C ${APP}${VERSION} clean
 	rm -f .configured
+
+distclean:
+	$(call distclean_package,${APP}${VERSION})

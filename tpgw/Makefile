@@ -23,3 +23,6 @@ install:
 	(cd ${DESTDIR}/etc/rc.d; ln -sf ../init.d/tpgw S97tpgw)
 
 clean:
+
+distclean:
+	$(call distclean_package,${APP}${VERSION})

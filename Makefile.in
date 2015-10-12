@@ -29,3 +29,8 @@ endef
 define build_package
 	make -C $1 ${BUILD_OPTIONS}
 endef
+
+define distclean_package
+	rm -rf $1
+	rm -rf .configured
+endif

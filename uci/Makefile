@@ -23,3 +23,6 @@ install:
 clean:
 	make -C ${APP} clean
 	rm -rf .configured
+
+distclean:
+	$(call distclean_package,${APP}${VERSION})
