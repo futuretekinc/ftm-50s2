@@ -17,6 +17,7 @@ define check_package
 		case $(shell ls ../dl | grep ${FILE_NAME} | sed "s/${FILE_NAME}.//") in \
 			tar.gz) tar xvfz ../dl/$1.tar.gz;; \
 			tar.bz2) tar xvfj ../dl/$1.tar.bz2;; \
+			zip) unzip ../dl/$1.zip;; \
 			*) echo "Unknown file type";; \
 		esac; \
 		if [ -d patch ]; then \

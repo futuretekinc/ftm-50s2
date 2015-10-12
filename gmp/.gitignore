@@ -58,6 +58,7 @@ include/generated
 # stgit generated dirs
 patches-*
 _install
+gmp-*
 
 # quilt's files
 patches
@@ -81,47 +82,4 @@ GTAGS
 *.la
 *.tmp
 \mpn
-gmp-*/config.log
-gmp-*/Makefile
-gmp-*/config.h
-gmp-*/config.m4
-gmp-*/config.status
-gmp-*/cxx/Makefile
-gmp-*/demos/Makefile
-gmp-*/demos/calc/Makefile
-gmp-*/demos/calc/calc-config.h
-gmp-*/demos/expr/Makefile
-gmp-*/demos/pexpr-config.h
-gmp-*/doc/Makefile
-gmp-*/fac_table.h
-gmp-*/fib_table.h
-gmp-*/gen-bases
-gmp-*/gen-fac
-gmp-*/gen-fib
-gmp-*/gen-jacobitab
-gmp-*/gen-psqr
-gmp-*/gen-trialdivtab
-gmp-*/gmp-mparam.h
-gmp-*/gmp.h
-gmp-*/libtool
-gmp-*/mp_bases.h
-gmp-*/mpf/Makefile
-gmp-*/mpq/Makefile
-gmp-*/mpz/Makefile
-gmp-*/printf/Makefile
-gmp-*/rand/Makefile
-gmp-*/scanf/Makefile
-gmp-*/stamp-h1
-gmp-*/tests/Makefile
-gmp-*/tests/cxx/Makefile
-gmp-*/tests/devel/Makefile
-gmp-*/tests/misc/Makefile
-gmp-*/tests/mpf/Makefile
-gmp-*/tests/mpq/Makefile
-gmp-*/tests/mpz/Makefile
-gmp-*/tests/rand/Makefile
-gmp-*/tests/t-*
-gmp-*/trialdivtab.h
-gmp-*/tune/Makefile
-gmp-*/tune/sqr_basecase.c
 

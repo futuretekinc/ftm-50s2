@@ -57,6 +57,7 @@ include/generated
 # stgit generated dirs
 patches-*
 _install
+openssh-*
 
 # quilt's files
 patches
@@ -76,42 +77,4 @@ GTAGS
 *~
 \#*#
 
-openssh-*/Makefile
-openssh-*/buildpkg.sh
-openssh-*/config.h
-openssh-*/config.log
-openssh-*/config.status
-openssh-*/moduli.5.out
-openssh-*/moduli.out
-openssh-*/openbsd-compat/Makefile
-openssh-*/openbsd-compat/regress/Makefile
-openssh-*/openssh.xml
-openssh-*/opensshd.init
-openssh-*/scp
-openssh-*/scp.1.out
-openssh-*/sftp
-openssh-*/sftp-server
-openssh-*/sftp-server.8.out
-openssh-*/sftp.1.out
-openssh-*/ssh
-openssh-*/ssh-add
-openssh-*/ssh-add.1.out
-openssh-*/ssh-agent
-openssh-*/ssh-agent.1.out
-openssh-*/ssh-keygen
-openssh-*/ssh-keygen.1.out
-openssh-*/ssh-keyscan
-openssh-*/ssh-keyscan.1.out
-openssh-*/ssh-keysign
-openssh-*/ssh-keysign.8.out
-openssh-*/ssh-pkcs11-helper
-openssh-*/ssh-pkcs11-helper.8.out
-openssh-*/ssh.1.out
-openssh-*/ssh_config.5.out
-openssh-*/ssh_config.out
-openssh-*/sshd
-openssh-*/sshd.8.out
-openssh-*/sshd_config.5.out
-openssh-*/sshd_config.out
-openssh-*/survey.sh
 

@@ -57,6 +57,7 @@ include/generated
 # stgit generated dirs
 patches-*
 _install
+zlib-*
 
 # quilt's files
 patches
@@ -77,13 +78,3 @@ GTAGS
 \#*#
 
 *.lo
-zlib-*/example
-zlib-*/example64
-zlib-*/examplesh
-zlib-*/libz.so.*
-zlib-*/minigzip
-zlib-*/minigzip64
-zlib-*/minigzipsh
-zlib-*/Makefile
-zlib-*/configure.log
-zlib-*/*.pc

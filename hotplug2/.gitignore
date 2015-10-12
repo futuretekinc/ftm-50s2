@@ -57,7 +57,7 @@ include/generated
 # stgit generated dirs
 patches-*
 _install
-
+hotplug2-*
 # quilt's files
 patches
 series
@@ -76,5 +76,3 @@ GTAGS
 *~
 \#*#
 
-hotplug2
-hotplug2-modwrap

@@ -58,6 +58,7 @@ include/generated
 patches-*
 _install
 libpcap-*
+
 # quilt's files
 patches
 series
@@ -76,11 +77,3 @@ GTAGS
 *~
 \#*#
 
-Makefile
-config.h
-config.log
-config.status
-grammar.c
-libpcap.so.1.7.4
-scanner.c
-tokdefs.h
