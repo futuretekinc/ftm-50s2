@@ -31,6 +31,5 @@ define build_package
 endef
 
 define distclean_package
-	rm -rf $1
-	rm -rf .configured
+	rm -rf $1 _install .configured
 endef

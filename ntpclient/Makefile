@@ -1,7 +1,7 @@
 include ../Makefile.in
 
 APP=ntpclient
-VERSION=_2010_365
+VERSION=-2010
 BINDIR=${DESTDIR}/usr/sbin
 
 all: configure build install
