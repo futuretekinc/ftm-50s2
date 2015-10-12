@@ -1,29 +1,26 @@
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR="${CROSS}ar r"
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export RANLIB=${CORSS}ranlib
-export PREFIX=/usr
-export DESTDIR=${CURDIR}/_install
+include ../Makefile.in
 
 APP=openssl
-VERSION=1.0.2d
+VERSION=-1.0.2d
+BUILD_OPTIONS=AR="${AR} r"
 
 all: configure build install
 
-build:
-	make -C ${APP}-${VERSION} CC=${CC} AR=${AR} RANLIB=${RANLIB}
+check:
+	$(call check_package,${APP}${VERSION})
 
-configure:
+build:
+	$(call build_package,${APP}${VERSION})
+
+configure: check
 	if [ ! -f .configured ] ; then \
-		(cd ${APP}-${VERSION}; ./Configure dist --prefix=${PREFIX}); \
+		(cd ${APP}${VERSION}; ./Configure dist --prefix=${PREFIX}); \
 		echo "yes" > .configured; \
 	fi
 
 install:
-	make -C ${APP}-${VERSION} install INSTALL_PREFIX=${DESTDIR}
+	make -C ${APP}${VERSION} install INSTALL_PREFIX=${DESTDIR}
 
 clean:
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
+	rm -f .configured

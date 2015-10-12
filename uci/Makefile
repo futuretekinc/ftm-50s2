@@ -1,25 +1,17 @@
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR=${CROSS}ar
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export RANLIB=${CORSS}ranlib
-export PREFIX=/usr
-export DESTDIR=${CURDIR}/_install
+include ../Makefile.in
 
 APP=uci
 VERSION=
 
-all: check configure build install
+all: configure build install
 
 check:
-	[ -d ${APP} ] || tar xvfz ../dl/${APP}.tar.gz
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP} 
+	$(call build_package,${APP}${VERSION})
 
-configure:
+configure: check
 	if [ ! -f .configured ]; then \
 		(cd ${APP}; cmake -D CMAKE_C_COMPILER=${CC} -D CMAKE_INSTALL_PREFIX:PATH=${PREFIX} -D CMAKE_LIBUBOX_DIR:=${CURDIR}/../libubox/_install/usr .); \
 		echo "yes" > .configured; \
@@ -30,3 +22,4 @@ install:
 
 clean:
 	make -C ${APP} clean
+	rm -rf .configured

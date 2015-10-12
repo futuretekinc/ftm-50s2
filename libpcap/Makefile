@@ -1,27 +1,19 @@
-export HOST=arm-linux
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR=${CROSS}ar
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export PREFIX=/usr
-export DESTDIR=${CURDIR}/_install
+include ../Makefile.in
 
 APP=libpcap
-VERSION=1.7.4
+VERSION=-1.7.4
 
-all: check configure build install
+all: configure build install
 
 check:
-	[ -d ${APP}-${VERSION} ] || tar xvfz ../dl/${APP}-${VERSION}.tar.gz
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP}-${VERSION} 
+	$(call build_package,${APP}${VERSION})
 
-configure:
+configure: check
 	if [ ! -f .configured ] ; then \
-		(cd ${APP}-${VERSION}; \
+		(cd ${APP}${VERSION}; \
 			./configure --host=${HOST} \
 				--with-pcap=linux \
 				ac_cv_linux_vers=2 \
@@ -32,7 +24,8 @@ configure:
 	fi;
 
 install:
-	make -C ${APP}-${VERSION} install 
+	make -C ${APP}${VERSION} install 
 
 clean:
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
+	rm -f .configured

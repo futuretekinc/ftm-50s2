@@ -1,26 +1,17 @@
-export HOST=armv5-linux
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR=${CROSS}ar
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export RANLIB=${CORSS}ranlib
-export PREFIX=/usr
-export DESTDIR=${CURDIR}/_install
+include ../Makefile.in
 
 APP=net-snmp
 VERSION=5.7.3
 
-all: check configure build install
+all: configure build install
 
 check:
-	[ -d ${APP}-${VERSION} ] || tar xvfz ${APP}-${VERSION}.tar.gz
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP}-${VERSION} 
+	$(call build_package,${APP}${VERSION})
 
-configure:
+configure: check
 	if [ ! -f .configured ]; then \
 		(cd ${APP}-${VERSION};\
 		./configure \
@@ -46,3 +37,4 @@ install:
 
 clean:
 	make -C ${APP}-${VERSION} clean
+	rm -f .configured

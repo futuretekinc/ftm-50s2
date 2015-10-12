@@ -1,30 +1,22 @@
-export HOST=arm-linux
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR=${CROSS}ar
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export PREFIX=/usr
+include ../Makefile.in
 
 APP=iptables
-VERSION=1.4.21
-export DESTDIR=${CURDIR}/_install
+VERSION=-1.4.21
 
-all: check configure build install
+all: configure build install
 
 check:
-	[ -d ${APP}-${VERSION} ] || tar xvfj ../dl/${APP}-${VERSION}.tar.bz2
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP}-${VERSION} CC=${CC}
+	$(call build_package,${APP}${VERSION})
 
-configure:
-	[ -f .configured ] || cd ${APP}-${VERSION};./configure --host=${HOST} --prefix=${PREFIX} --disable-ipv6 CC=${CC}; echo "yes" > .configured
+configure: check
+	[ -f .configured ] || cd ${APP}${VERSION};./configure --host=${HOST} --prefix=${PREFIX} --disable-ipv6 CC=${CC}; echo "yes" > .configured
 
 install:
-	make -C ${APP}-${VERSION} install 
+	make -C ${APP}${VERSION} install 
 
 clean:
-	rm -f .configured
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
+	rm -rf .configured

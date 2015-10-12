@@ -1,0 +1,30 @@
+export HOST=arm-linux
+export CROSS=armv5-linux-
+export TARGETMACH=arm-linux
+export CC=${CROSS}gcc
+export CXX=${CROSS}g++
+export AR=${CROSS}ar
+export LD=${CROSS}ld
+export AS=${CROSS}as
+export STRIP=${CROSS}strip
+export RANLIB=${CORSS}ranlib
+export PREFIX=/usr
+export DESTDIR=${CURDIR}/_install
+
+define check_package
+	$(eval FILE_NAME := $1)
+	if [ ! -d ${FILE_NAME} ]; then \
+		case $(shell ls ../dl | grep ${FILE_NAME} | sed "s/${FILE_NAME}.//") in \
+			tar.gz) tar xvfz ../dl/$1.tar.gz;; \
+			tar.bz2) tar xvfj ../dl/$1.tar.bz2;; \
+			*) echo "Unknown file type";; \
+		esac; \
+		if [ -d patch ]; then \
+			patch -p0 < patch/$1.diff; \
+		fi; \
+	fi; 
+endef
+
+define build_package
+	make -C $1 ${BUILD_OPTIONS}
+endef

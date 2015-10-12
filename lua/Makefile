@@ -1,27 +1,23 @@
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR=${CROSS}ar
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export RANLIB=${CORSS}ranlib
-export DESTDIR=${CURDIR}/_install
+include ../Makefile.in
 
 APP=lua
-VERSION=5.3.1
+VERSION=-5.3.1
+BUILD_OPTIONS=linux
 
-all: check build install
+all: build install
 
 check:
-	[ -d ${APP}-${VERSION} ] || (tar xvfz ${APP}-${VERSION}.tar.gz; patch -p0 < patch/${APP}-${VERSION}.diff)
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP}-${VERSION} linux
+	$(call build_package,${APP}${VERSION})
 
-configure:
+configure: check
+
 	
 install:
-	make -C ${APP}-${VERSION} install 
+	make -C ${APP}${VERSION} install 
 
 clean:
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
+	rm -f .configured

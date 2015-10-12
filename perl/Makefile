@@ -1,21 +1,18 @@
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR=${CROSS}ar
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export RANLIB=${CORSS}ranlib
+include ../Makefile.in
 
 APP=perl
-VERSION=5.22.0
-INSTALLDIR=${CURDIR}/_install
+VERSION=-5.22.0
 
-all: build install
+all: configure build install
+
+check:
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP}-${VERSION} 
-configure:
-	cd ${APP}-${VERSION};\
+	$(call build_package,${APP}${VERSION})
+
+configure: check
+	cd ${APP}${VERSION};\
 	./Configure -des \
 		-Dusecrosscomplie \
 		-Dtargethost=192.168.1.10 \
@@ -27,7 +24,8 @@ configure:
 		-Dlibpth=/opt/STM/STLinux-2.4/devkit/armv5/lib \
 		-Dtargetdir=${CURDIR}/_install/usr	
 install:
-	make -C ${APP}-${VERSION} install DESTDIR=${INSTALLDIR}
+	make -C ${APP}${VERSION} install 
 
 clean:
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
+	rm -f .configured

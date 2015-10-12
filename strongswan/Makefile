@@ -1,30 +1,21 @@
-export HOST=arm-linux
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR="${CROSS}ar"
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export RANLIB=${CORSS}ranlib
-export PREFIX=/usr
-export DESTDIR=${CURDIR}/_install
+include ../Makefile.in
 
 APP=strongswan
-VERSION=5.3.3
+VERSION=-5.3.3
 
 GMPDIR=${CURDIR}/../gmp/_install/usr
 
-all: check configure build install
+all: configure build install
 
 check:
-	[ -d ${APP}-${VERSION} ] || (tar xvfz ../dl/${APP}-${VERSION}.tar.gz; patch -p0 < patch/${APP}-${VERSION}.diff)
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP}-${VERSION} 
+	$(call build_package,${APP}${VERSION})
 
-configure:
+configure: check
 	if [ ! -f .configured ]; then\
-		(cd ${APP}-${VERSION}; ./configure \
+		(cd ${APP}${VERSION}; ./configure \
 			--host=${HOST} \
 			--prefix=${PREFIX} \
 			--sysconfdir=/etc \
@@ -34,7 +25,8 @@ configure:
 	fi;
 
 install:
-	make -C ${APP}-${VERSION} install 
+	make -C ${APP}${VERSION} install 
 
 clean:
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
+	rm -f .configured

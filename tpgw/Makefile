@@ -1,10 +1,16 @@
-DESTDIR=${CURDIR}/_install
+include ../Makefile.in
 
-all: build install
+APP=tpgw
+VERSION=-2015.06.15
 
-build:
+all: configure build install
 
-configure:
+check:
+	$(call check_package,${APP}${VERSION})
+
+build: ;
+
+configure: check
 
 install:
 	[ -d ${DESTDIR}/opt ] || mkdir -p ${DESTDIR}/opt

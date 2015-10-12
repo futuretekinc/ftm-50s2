@@ -9,6 +9,5 @@
 #
 # Normal rules
 #
-
 pcre-*
 _install

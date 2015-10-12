@@ -1,32 +1,25 @@
-export HOST=arm-linux
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR=${CROSS}ar
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export PREFIX=/usr
-export DESTDIR=${CURDIR}/_install
+include ../Makefile.in
 
 APP=gmp
-VERSION=6.0.0
+VERSION=-6.0.0
 
-all: check configure build install
+all: configure build install
 
 check:
-	[ -d ${APP}-${VERSION} ] || tar xvfj ${APP}-${VERSION}.tar.bz2
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP}-${VERSION} 
+	$(call build_package,${APP}${VERSION})
 
-configure:
+configure: check
 	if [ ! -f .configured ] ; then \
-		(cd ${APP}-${VERSION}; ./configure --host=${HOST} --prefix=${PREFIX} CC=${CC} AR=${AR});\
+		(cd ${APP}${VERSION}; ./configure --host=${HOST} --prefix=${PREFIX} CC=${CC} AR=${AR});\
 		echo "yes" > .configured;\
 	fi;
 
 install:
-	make -C ${APP}-${VERSION} install 
+	make -C ${APP}${VERSION} install 
 
 clean:
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
+	rm -rf .configured

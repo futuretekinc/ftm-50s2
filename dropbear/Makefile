@@ -1,34 +1,24 @@
-export HOST=arm-linux
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR=${CROSS}ar
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export PREFIX=/usr
-export DESTDIR=${CURDIR}/_install
+include ../Makefile.in
 
 APP=dropbear
-VERSION=2015.68
+VERSION=-2015.68
 
 CONFIGDIR=/etc/config
 INITDDIR=/etc/init.d
 RCDDIR=/etc/rc.d
+BUILD_OPTIONS=STATIC=1 SCPPROGRESS=0 PROGRAMS="dropbear dropbearkey scp dbclient"
 
-all: check configure build install
+all: configure build install
 
 check:
-	[ -d ${APP}-${VERSION} ] || tar xvfz ${APP}-${VERSION}.tar.gz
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP}-${VERSION} \
-		STATIC=1 \
-		SCPPROGRESS=0 \
-		PROGRAMS="dropbear dropbearkey scp dbclient"
+	$(call build_package,${APP}${VERSION})
 
-configure:
+configure: check
 	if [ ! -f .configured ]; then \
-		(cd ${APP}-${VERSION};\
+		(cd ${APP}${VERSION};\
 		./configure --host=${HOST} \
 			--disable-zlib \
 			--disable-largefile \
@@ -47,7 +37,7 @@ configure:
 	fi;
 
 install:
-	make -C ${APP}-${VERSION} install DESTDIR=${DESTDIR}
+	make -C ${APP}${VERSION} install DESTDIR=${DESTDIR}
 	[ -d ${DESTDIR}${CONFIGDIR} ] || mkdir -p ${DESTDIR}${CONFIGDIR}
 	install -m 644 config/config_dropbear ${DESTDIR}${CONFIGDIR}/${APP}
 	[ -d ${DESTDIR}${INITDDIR} ] || mkdir -p ${DESTDIR}${INITDDIR}
@@ -57,4 +47,5 @@ install:
 
 
 clean:
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
+	rm -rf .configured

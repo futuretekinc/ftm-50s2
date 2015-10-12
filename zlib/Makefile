@@ -1,30 +1,22 @@
-export HOST=arm-linux
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR=${CROSS}ar
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export TARGETMACH=arm-linux
-export PREFIX=/usr
-export DESTDIR=${CURDIR}/_install
+include ../Makefile.in
 
 APP=zlib
-VERSION=1.2.8
+VERSION=-1.2.8
 
-all: check configure build install
+all: configure build install
 
 check:
-	[ -d ${APP}-${VERSION} ] || tar xvfz ${APP}-${VERSION}.tar.gz
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP}-${VERSION} 
+	$(call build_package,${APP}${VERSION})
 
-configure:
-	cd ${APP}-${VERSION}; ./configure --prefix=${PREFIX}
+configure: check
+	cd ${APP}${VERSION}; ./configure --prefix=${PREFIX}
 
 install:
-	make -C ${APP}-${VERSION} install 
+	make -C ${APP}${VERSION} install 
 
 clean:
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
+	rm -rf .configured

@@ -1,27 +1,23 @@
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR=${CROSS}ar
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export DESTDIR=${CURDIR}/_install
+include ../Makefile.in
 
 APP=busybox
-VERSION=1.23.2
+VERSION=-1.23.2
 
-all: check build install
+all: configure build install
 
 check:
-	[ -d ${APP}-${VERSION} ] || tar xvfj ${APP}-${VERSION}.tra.bz2
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP}-${VERSION} CC=${CC}
+	$(call build_package,${APP}${VERSION})
 
-configure:
-	cp config/config.ftm-50s2 ${APP}-${VERSION}/.config
-	make -C ${APP}-${VERSION} oldconfig
+configure: check
+	cp config/config.ftm-50s2 ${APP}${VERSION}/.config
+	make -C ${APP}${VERSION} oldconfig
 
 install:
-	make -C ${APP}-${VERSION} install
+	make -C ${APP}${VERSION} install
 
 clean:
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
+	rm .configured

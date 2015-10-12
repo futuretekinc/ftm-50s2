@@ -1,29 +1,26 @@
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR=${CROSS}ar
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export RANLIB=${CORSS}ranlib
+include ../Makefile.in
 
 APP=ntpclient
-VERSION=2010
-INSTALLDIR=${CURDIR}/_install
-BINDIR=${INSTALLDIR}/usr/sbin
+VERSION=_2010_365
+BINDIR=${DESTDIR}/usr/sbin
 
-all: build install
+all: configure build install
+
+check:
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP}-${VERSION}
+	$(call build_package,${APP}${VERSION})
 
-configure:
+configure: check
 	
 
 install:
-	[ -d ${INSTALLDIR}/usr/sbin ] || mkdir -p ${BINDIR}
+	[ -d ${DESTDIR}/usr/sbin ] || mkdir -p ${BINDIR}
 
-	install -m 755 ${APP}-${VERSION}/${APP} ${BINDIR}/${APP}
-	cp -r config/* ${INSTALLDIR}/
+	install -m 755 ${APP}${VERSION}/${APP} ${BINDIR}/${APP}
+	cp -r config/* ${DESTDIR}/
 
 clean:
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
+	rm -f .configured

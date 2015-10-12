@@ -1,29 +1,22 @@
-export HOST=arm-linux
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR=${CROSS}ar
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export RANLIB=${CORSS}ranlib
-export DESTDIR=${CURDIR}/_install
+include ../Makefile.in
 
 APP=hotplug2
-VERSION=1.0
+VERSION=-1.0
 
-all: check build install
+all: configure build install
 
 check:
-	[ -d ${APP}-${VERSION} ] || tar xvfz ${APP}-${VERSION}.tar.gz
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP}-${VERSION} 
+	$(call build_package,${APP}${VERSION})
 
-configure:
+configure: check
 
 install:
-	make -C ${APP}-${VERSION} install DESTDIR=${DESTDIR}
+	make -C ${APP}${VERSION} install DESTDIR=${DESTDIR}
 	cp -r config/* ${DESTDIR}/
 
 clean:
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
+	rm -rf .configured

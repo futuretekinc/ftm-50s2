@@ -1,25 +1,22 @@
-export CROSS=armv5-linux-
-export CC=${CROSS}gcc
-export AR=${CROSS}ar
-export LD=${CROSS}ld
-export AS=${CROSS}as
-export STRIP=${CROSS}strip
-export RANLIB=${CORSS}ranlib
+include ../Makefile.in
 
 APP=pcre2
-VERSION=10.20
-INSTALLDIR=${CURDIR}/_install
+VERSION=-10.20
 
-all: build install
+all: configure build install
+
+check:
+	$(call check_package,${APP}${VERSION})
 
 build:
-	make -C ${APP}-${VERSION}
+	$(call build_package,${APP}${VERSION})
 
-configure:
-	cd ${APP}-${VERSION};./configure --host=arm-linux -prefix=/usr 
+configure: check
+	cd ${APP}${VERSION};./configure --host=${HOST} -prefix=${PREFIX}
 
 install:
-	make -C ${APP}-${VERSION} install DESTDIR=${INSTALLDIR}
+	make -C ${APP}${VERSION} install 
 
 clean:
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
+	rm -f .configured
