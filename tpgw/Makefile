@@ -1,7 +1,7 @@
 include ../Makefile.in
 
 APP=tpgw
-VERSION=-2015.06.15
+VERSION=-2015.06.22
 
 all: configure build install
 
@@ -14,7 +14,7 @@ configure: check
 
 install:
 	[ -d ${DESTDIR}/opt ] || mkdir -p ${DESTDIR}/opt
-	cp -r src/* ${DESTDIR}/opt/
+	cp -r ${APP}${VERSION}/* ${DESTDIR}/opt/
 	[ -d ${DESTDIR}/usr ] || mkdir -p ${DESTDIR}/usr
 	cp -r node_usr/local ${DESTDIR}/usr/
 	[ -d ${DESTDIR}/etc/init.d ] || mkdir -p ${DESTDIR}/etc/init.d

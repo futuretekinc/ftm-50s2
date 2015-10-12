@@ -1,0 +1,20 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006 OpenWrt.org
+START=97
+
+start() {
+	local apikey
+
+	config_load tpgw
+	config_get  apikey "tpgw" apikey
+
+	export APIKEY=$apikey
+
+	/opt/thingplus.sh start
+
+}
+
+stop() {
+	/opt/thingplus.sh stop
+}
+
