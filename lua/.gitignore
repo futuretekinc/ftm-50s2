@@ -57,7 +57,7 @@ include/generated
 # stgit generated dirs
 patches-*
 _install
-
+lua-*
 # quilt's files
 patches
 series
@@ -86,6 +86,3 @@ CMakeFiles
 *.dylib
 install_manifest.txt
 
-uci
-uci_config.h
-test/save
