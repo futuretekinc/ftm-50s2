@@ -1,7 +1,0 @@
-#!/bin/sh
-for f in $@
-do
-  /bin/rm -f $f
-  scp -P 22 -q root@192.168.1.10:/home/xtra/work/ftm-50s2/perl/_install/usr/$f . || exit 1
-done
-exit 0
