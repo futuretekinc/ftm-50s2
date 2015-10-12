@@ -3,7 +3,7 @@ include ../Makefile.in
 APP=webadmin
 VERSION=-0.1.0
 
-all: confiugre build install
+all: configure build install
 
 check:
 	$(call check_package,${APP}${VERSION})
