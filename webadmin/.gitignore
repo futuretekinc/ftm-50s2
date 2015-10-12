@@ -59,7 +59,7 @@ include/generated
 # stgit generated dirs
 patches-*
 _install
-
+webadmin-*
 # quilt's files
 patches
 series

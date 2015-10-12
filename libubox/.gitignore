@@ -57,7 +57,7 @@ include/generated
 # stgit generated dirs
 patches-*
 _install
-
+libubox
 # quilt's files
 patches
 series

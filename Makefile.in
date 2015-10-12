@@ -33,4 +33,4 @@ endef
 define distclean_package
 	rm -rf $1
 	rm -rf .configured
-endif
+endef

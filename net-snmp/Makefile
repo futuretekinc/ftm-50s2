@@ -1,7 +1,7 @@
 include ../Makefile.in
 
 APP=net-snmp
-VERSION=5.7.3
+VERSION=-5.7.3
 
 all: configure build install
 
@@ -13,7 +13,7 @@ build:
 
 configure: check
 	if [ ! -f .configured ]; then \
-		(cd ${APP}-${VERSION};\
+		(cd ${APP}${VERSION};\
 		./configure \
 			--host=${HOST} \
 			--target=${HOST} \
@@ -33,10 +33,10 @@ configure: check
 	fi;
 	
 install:
-	make -C ${APP}-${VERSION} install DESTDIR=${DESTDIR}
+	make -C ${APP}${VERSION} install DESTDIR=${DESTDIR}
 
 clean:
-	make -C ${APP}-${VERSION} clean
+	make -C ${APP}${VERSION} clean
 	rm -f .configured
 
 distclean:

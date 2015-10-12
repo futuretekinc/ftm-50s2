@@ -13,7 +13,7 @@ check:
 build:
 	$(call build_package,${APP}${VERSION})
 
-configure:
+configure: check
 	if [ ! -f .configured ] ; then \
 		(cd ${APP}${VERSION}; \
 		./configure --host=${HOST} \

@@ -58,7 +58,7 @@ include/generated
 # stgit generated dirs
 patches-*
 _install
-
+ntpclient-*
 # quilt's files
 patches
 series
