@@ -3,7 +3,7 @@ include ../Makefile.in
 APP=lighttpd
 VERSION=-1.4.37
 PCREDIR=../pcre
-PCREDESTDIR=..${PCREDIR}/_install
+PCREDESTDIR=${PCREDIR}/_install
 
 all: configure build install
 
@@ -13,7 +13,7 @@ check:
 configure: check
 	if [ ! -f .configured ] ; then \
 		if [ ! -d ${PCREDESTDIR} ]; then \
-			make -C ${PCREDIR} build; \
+			make -C ${PCREDIR}; \
 		fi; \
 		(cd ${APP}${VERSION};\
 		./configure --host=${HOST} \
