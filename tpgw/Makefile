@@ -8,9 +8,9 @@ all: configure build install
 check:
 	$(call check_package,${APP}${VERSION})
 
-build: ;
-
 configure: check
+
+build: configure 
 
 install:
 	[ -d ${DESTDIR}/opt ] || mkdir -p ${DESTDIR}/opt
@@ -20,7 +20,7 @@ install:
 	[ -d ${DESTDIR}/etc/rc.d ] || mkdir -p ${DESTDIR}/etc/rc.d
 	(cd ${DESTDIR}/etc/rc.d; ln -sf ../init.d/tpgw S97tpgw)
 
-clean:
+clean: ;
 
-distclean:
+distclean: clean
 	$(call distclean_package,${APP}${VERSION})

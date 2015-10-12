@@ -8,15 +8,15 @@ all: configure build install
 check:
 	$(call check_package,${APP}${VERSION})
 
-build: ;
-
 configure: check
+
+build: configure
 
 install:
 	[ -d ${DESTDIR}/usr ] || mkdir -p ${DESTDIR}/usr
 	cp -r ${APP}${VERSION}/* ${DESTDIR}/usr/
 
-clean:
+clean: ;
 
-distclean:
+distclean: clean
 	$(call distclean_package,${APP}${VERSION})

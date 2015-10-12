@@ -12,14 +12,16 @@ build:
 	$(call build_package,${APP}${VERSION})
 
 configure: check
-	[ -f .configured ] || cd ${APP}${VERSION};./configure --host=${HOST} -prefix=${PREFIX}; echo "yes" > .configured
-
+	if [ ! -f .configured ] ; then \
+		(cd ${APP}${VERSION}; ./configure --host=${HOST} --prefix=${PREFIX});\
+		echo "yes" > .configured; \
+	fi;
+	
 install:
 	make -C ${APP}${VERSION} install 
 
 clean:
 	make -C ${APP}${VERSION} clean
-	rm -f .configured
 
-distclean:
+distclean: clean
 	$(call distclean_package,${APP}${VERSION})

@@ -2,18 +2,19 @@ include ../Makefile.in
 
 APP=lighttpd
 VERSION=-1.4.37
-PCREDIR=../pcre/_install
+PCREDIR=../pcre
+PCREDESTDIR=..${PCREDIR}/_install
 
 all: configure build install
 
 check:
 	$(call check_package,${APP}${VERSION})
 
-build:
-	$(call build_package,${APP}${VERSION})
-
 configure: check
 	if [ ! -f .configured ] ; then \
+		if [ ! -d ${PCREDESTDIR} ]; then \
+			make -C ${PCREDIR} build; \
+		fi; \
 		(cd ${APP}${VERSION};\
 		./configure --host=${HOST} \
 			--prefix=${PREFIX} \
@@ -22,12 +23,15 @@ configure: check
 			--without-zlib \
 			--without-bzip2 \
 			--disable-ipv6 \
-			PCRECONFIG=${CURDIR}/${PCREDIR}/usr/bin/pcre-config \
-			PCRE_LIB=${CURDIR}/${PCREDIR}/usr/lib/libpcre.a \
-			LIBS=-L${CURDIR}/${PCREDIR}/usr/lib \
-			CFLAGS="-DHAVE_PCRE_H=1 -DHAVE_LIBPCRE=1 -I${CURDIR}/${PCREDIR}/usr/include"); \
+			PCRECONFIG=${CURDIR}/${PCREDESTDIR}/usr/bin/pcre-config \
+			PCRE_LIB=${CURDIR}/${PCREDESTDIR}/usr/lib/libpcre.a \
+			LIBS=-L${CURDIR}/${PCREDESTDIR}/usr/lib \
+			CFLAGS="-DHAVE_PCRE_H=1 -DHAVE_LIBPCRE=1 -I${CURDIR}/${PCREDESTDIR}/usr/include"); \
 		echo "yes" > .configured; \
 	fi;
+
+build: configure
+	$(call build_package,${APP}${VERSION})
 
 install:
 	make -C ${APP}${VERSION} install 
@@ -35,7 +39,6 @@ install:
 
 clean:
 	make -C ${APP}${VERSION} clean
-	rm -f .configured
 
-distclean:
+distclean: clean
 	$(call distclean_package,${APP}${VERSION})

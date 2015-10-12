@@ -3,17 +3,17 @@ COMMON_APPS=busybox openssl iptables zlib openssh libpcap tcpdump lua libubox uc
 
 all: build
 
-build: 
-	for app in $(COMMON_APPS); do \
-		make -C $$app; \
-	done
-
-configure:
+configure: 
 	for app in $(COMMON_APPS); do \
 		make -C $$app configure; \
 	done
 	
-target_gen: 
+build:  configure
+	for app in $(COMMON_APPS); do \
+		make -C $$app; \
+	done
+
+target: 
 	rm -rf ${TARGET}/*;
 	tools/make_target ${TARGET};
 	cp -r base/common/* ${TARGET}/
@@ -23,12 +23,12 @@ target_gen:
 	done
 
 clean:
-	for app in $(APPS); do \
+	for app in $(COMMON_APPS); do \
 		make -C $$app clean; \
 	done
 
 distclean:
-	for app in $(APPS); do \
+	for app in $(COMMON_APPS); do \
 		make -C $$app distclean; \
 	done
 
