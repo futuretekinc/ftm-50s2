@@ -33,7 +33,7 @@ install:
 	make -C ${APP}${VERSION} install-files DESTDIR=${DESTDIR} STRIP_OPT="--strip-program=${STRIP}"
 
 clean:
-	make -C ${APP}${VERSION} clean
+	$(call clean_package,${APP}${VERSION})
 
 distclean: clean
 	$(call distclean_package,${APP}${VERSION})

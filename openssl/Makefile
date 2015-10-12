@@ -3,6 +3,7 @@ include ../Makefile.in
 APP=openssl
 VERSION=-1.0.2d
 BUILD_OPTIONS=AR="${AR} r"
+INSTALL_OPTIONS=INSTALL_PREFIX=${DESTDIR}
 
 all: configure build install
 
@@ -19,10 +20,10 @@ build: configure
 	$(call build_package,${APP}${VERSION})
 
 install:
-	make -C ${APP}${VERSION} install INSTALL_PREFIX=${DESTDIR}
+	$(call install_package,${APP}${VERSION})
 
 clean:
-	make -C ${APP}${VERSION} clean
+	$(call clean_package,${APP}${VERSION})
 
 distclean: clean
 	$(call distclean_package,${APP}${VERSION})

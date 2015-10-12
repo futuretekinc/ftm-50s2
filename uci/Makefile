@@ -18,10 +18,10 @@ build: configure
 	$(call build_package,${APP}${VERSION})
 
 install:
-	make -C ${APP} install 
+	$(call install_package,${APP}${VERSION})
 
 clean:
-	make -C ${APP} clean
+	$(call clean_package,${APP}${VERSION})
 
 distclean: clean
 	$(call distclean_package,${APP}${VERSION})

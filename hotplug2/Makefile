@@ -3,6 +3,8 @@ include ../Makefile.in
 APP=hotplug2
 VERSION=-1.0
 
+INSTALL_OPTIONS=DESTDIR=${DESTDIR}
+
 all: configure build install
 
 check:
@@ -15,11 +17,11 @@ build: configure
 	$(call build_package,${APP}${VERSION})
 
 install:
-	make -C ${APP}${VERSION} install DESTDIR=${DESTDIR}
+	$(call install_package,${APP}${VERSION})
 	cp -r config/* ${DESTDIR}/
 
 clean:
-	make -C ${APP}${VERSION} clean
+	$(call clean_package,${APP}${VERSION})
 
 distclean: clean
 	$(call distclean_package,${APP}${VERSION})

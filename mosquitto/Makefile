@@ -11,6 +11,7 @@ BUILD_OPTIONS=	WITH_TLS=no \
 		prefix=${PREFIX} \
 		CFLAGS=${CFLAGS} \
 		LDFLAGS=${LDFLAGS} 
+INSTALL_OPTIONS=DESTDIR=${DESTDIR}
 
 all: configure build install
 
@@ -23,11 +24,10 @@ build: configure
 	$(call build_package,${APP}${VERSION})
 
 install:
-	make -C ${APP}${VERSION} install DESTDIR=${DESTDIR} 
+	$(call install_package,${APP}${VERSION})
 
 clean:
-	make -C ${APP}${VERSION} clean
-	rm -f .configured
+	$(call clean_package,${APP}${VERSION})
 
 distclean: clean
 	$(call distclean_package,${APP}${VERSION})

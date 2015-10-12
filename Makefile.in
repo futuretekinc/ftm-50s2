@@ -30,6 +30,14 @@ define build_package
 	make -C $1 ${BUILD_OPTIONS}
 endef
 
+define install_package
+	make -C $1 install  ${INSTALL_OPTIONS}
+endef
+
+define clean_package
+	rm -rf $1 _install 
+endef
+
 define distclean_package
 	rm -rf $1 _install .configured
 endef
