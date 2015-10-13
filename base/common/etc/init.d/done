@@ -14,8 +14,8 @@ boot() {
 				echo $MODEL > /var/lib/misc/model
 			;;
 			devid=*)
-				DEVID="${x#devid=}"
-				echo $DEVID > /var/lib/misc/devid
+				SN="${x#devid=}"
+				echo $SN > /var/lib/misc/sn
 			;;
 		esac
 	done
@@ -23,6 +23,6 @@ boot() {
 	echo ""
 	echo ""
 	echo "System initialization completed."
-	echo "        Model : $MODEL"
-	echo "    Device ID : $DEVID"
+	echo "  Model : $MODEL"
+	echo "    S/N : $SN"
 }

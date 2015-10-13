@@ -17,6 +17,9 @@ build: configure
 
 install:
 	$(call install_package,${APP}${VERSION})
+	chmod +s ${DESTDIR}/bin/busybox
+	[ -d ${DESTDIR}/etc ] || mkdir -p ${DESTDIR}/etc
+	install -m 644 config/busybox.conf ${DESTDIR}/etc
 
 clean:
 	$(call clean_package,${APP}${VERSION})

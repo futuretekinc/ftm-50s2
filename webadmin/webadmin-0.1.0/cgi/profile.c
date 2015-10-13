@@ -102,7 +102,7 @@ int	FTMC_LoadProfileConfig(FTMC_PROFILE_CONFIG *pConfig)
 		strncpy(xConfig.szModel, szBuf, sizeof(xConfig.szModel) - 1);
 	}
 
-	fp = fopen("/var/lib/misc/devid", "r");
+	fp = fopen("/var/lib/misc/sn", "r");
 	if (fp != NULL)
 	{
 		fscanf(fp, "%s", szBuf);	

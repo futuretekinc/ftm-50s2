@@ -16,11 +16,12 @@ build:  configure
 target: 
 	rm -rf ${TARGET}/*;
 	tools/make_target ${TARGET};
-	cp -r base/common/* ${TARGET}/
 	tools/make_dev ${TARGET};
+	cp -r base/common/* ${TARGET}/
 	for app in $(COMMON_APPS); do \
 		cp -r $$app/_install/* ${TARGET}/; \
 	done
+	sudo chown -R 0:0 ${TARGET}/*
 
 clean:
 	for app in $(COMMON_APPS); do \
