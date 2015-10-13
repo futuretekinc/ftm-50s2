@@ -25,7 +25,8 @@ install:
 	cd ${DESTDIR}/etc/rc.d; ln -s ../init.d/webadmin S50webadmin	
 
 clean:
-	$(call clean_package,${APP}${VERSION})
+	make -C ${APP}${VERSION}
+	rm -rf _install 
 
 distclean: clean
-	$(call distclean_package,${APP}${VERSION})
+	rm -rf .confiugred
