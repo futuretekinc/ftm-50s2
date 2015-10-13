@@ -24,6 +24,7 @@ define check_package
 		if [ -d patch ]; then \
 			patch -p0 < patch/$1.diff; \
 		fi; \
+		rm -rf .configured;\
 	fi; 
 endef
 
