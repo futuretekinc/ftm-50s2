@@ -16,6 +16,12 @@ build: configure
 
 install:
 	$(call install_package,${APP}${VERSION})
+	[ -d ${DESTDIR}/etc/config ] || mkdir -p ${DESTDIR}/etc/config
+	install -m 644 config/config_default_firewall ${DESTDIR}/etc/config/firewall
+	[ -d ${DESTDIR}/etc/init.d ] || mkdir -p ${DESTDIR}/etc/init.d
+	install -m 755 config/initd_firewall ${DESTDIR}/etc/init.d/firewall
+	[ -d ${DESTDIR}/etc/rc.d ] || mkdir -p ${DESTDIR}/etc/rc.d
+	(cd ${DESTDIR}/etc/rc.d; ln -s ../init.d/firewall S45firewall)
 
 clean:
 	$(call clean_package,${APP}${VERSION})
