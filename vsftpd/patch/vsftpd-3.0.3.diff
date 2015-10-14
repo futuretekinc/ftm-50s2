@@ -1,0 +1,64 @@
+diff -urN vsftpd-3.0.3.org/Makefile vsftpd-3.0.3/Makefile
+--- vsftpd-3.0.3.org/Makefile	2012-09-16 16:27:35.000000000 +0900
++++ vsftpd-3.0.3/Makefile	2015-10-14 15:25:49.376255073 +0900
+@@ -1,6 +1,8 @@
+ # Makefile for systems with GNU tools
+ CC 	=	gcc
+ INSTALL	=	install
++DESTDIR = 
++PREFIX  = /usr
+ IFLAGS  = -idirafter dummyinc
+ #CFLAGS = -g
+ CFLAGS	=	-O2 -fPIE -fstack-protector --param=ssp-buffer-size=4 \
+@@ -29,21 +31,12 @@
+ 	$(CC) -o vsftpd $(OBJS) $(LINK) $(LDFLAGS) $(LIBS)
+ 
+ install:
+-	if [ -x /usr/local/sbin ]; then \
+-		$(INSTALL) -m 755 vsftpd /usr/local/sbin/vsftpd; \
+-	else \
+-		$(INSTALL) -m 755 vsftpd /usr/sbin/vsftpd; fi
+-	if [ -x /usr/local/man ]; then \
+-		$(INSTALL) -m 644 vsftpd.8 /usr/local/man/man8/vsftpd.8; \
+-		$(INSTALL) -m 644 vsftpd.conf.5 /usr/local/man/man5/vsftpd.conf.5; \
+-	elif [ -x /usr/share/man ]; then \
+-		$(INSTALL) -m 644 vsftpd.8 /usr/share/man/man8/vsftpd.8; \
+-		$(INSTALL) -m 644 vsftpd.conf.5 /usr/share/man/man5/vsftpd.conf.5; \
+-	else \
+-		$(INSTALL) -m 644 vsftpd.8 /usr/man/man8/vsftpd.8; \
+-		$(INSTALL) -m 644 vsftpd.conf.5 /usr/man/man5/vsftpd.conf.5; fi
+-	if [ -x /etc/xinetd.d ]; then \
+-		$(INSTALL) -m 644 xinetd.d/vsftpd /etc/xinetd.d/vsftpd; fi
++	[ -d ${DESTDIR}${PREFIX}/sbin ] || mkdir -p ${DESTDIR}${PREFIX}/sbin
++	$(INSTALL) -m 755 vsftpd ${DESTDIR}${PREFIX}/sbin/vsftpd
++	[ -d ${DESTDIR}${PREFIX}/share/man/man8 ] || mkdir -p ${DESTDIR}${PREFIX}/share/man/man8
++	$(INSTALL) -m 644 vsftpd.8 ${DESTDIR}${PREFIX}/share/man/man8/vsftpd.8 
++	[ -d ${DESTDIR}${PREFIX}/share/man/man5 ] || mkdir -p ${DESTDIR}${PREFIX}/share/man/man5
++	$(INSTALL) -m 644 vsftpd.conf.5 ${DESTDIR}${PREFIX}/share/man/man5/vsftpd.conf.5
+ 
+ clean:
+ 	rm -f *.o *.swp vsftpd
+diff -urN vsftpd-3.0.3.org/vsf_findlibs.sh vsftpd-3.0.3/vsf_findlibs.sh
+--- vsftpd-3.0.3.org/vsf_findlibs.sh	2012-03-28 11:17:41.000000000 +0900
++++ vsftpd-3.0.3/vsf_findlibs.sh	2015-10-14 15:25:41.416255073 +0900
+@@ -1,7 +1,7 @@
+ #!/bin/sh
+ # Cheesy hacky location of additional link libraries.
+ 
+-locate_library() { [ ! "$1*" = "`echo $1*`" ]; }
++locate_library() { [ ! "${LIB_LOC}$1*" = "`echo $LIB_LOC$1*`" ]; }
+ find_func() { egrep $1 $2 >/dev/null; }
+ 
+ if find_func hosts_access tcpwrap.o; then
+@@ -49,9 +49,9 @@
+ 
+ # Look for libcap (capabilities)
+ if locate_library /lib/libcap.so.1; then
+-  echo "/lib/libcap.so.1";
++  echo "${LIB_LOC}/lib/libcap.so.1";
+ elif locate_library /lib/libcap.so.2; then
+-  echo "/lib/libcap.so.2";
++  echo "${LIB_LOC}/lib/libcap.so.2";
+ else
+   locate_library /usr/lib/libcap.so && echo "-lcap";
+   locate_library /lib/libcap.so && echo "-lcap";
