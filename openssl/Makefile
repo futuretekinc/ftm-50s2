@@ -1,9 +1,10 @@
 include ../Makefile.in
 
-APP=openssl
-VERSION=-1.0.2d
 BUILD_OPTIONS=AR="${AR} r"
 INSTALL_OPTIONS=INSTALL_PREFIX=${DESTDIR}
+
+APP=openssl
+VERSION=-1.0.2d
 
 all: configure build install
 
@@ -12,7 +13,8 @@ check:
 
 configure: check
 	if [ ! -f .configured ] ; then \
-		(cd ${APP}${VERSION}; ./Configure dist --prefix=${PREFIX}); \
+		(export CLFAGS=-fPIC; cd ${APP}${VERSION}; ./Configure \
+		--prefix=${PREFIX} shared linux-armv5); \
 		echo "yes" > .configured; \
 	fi
 

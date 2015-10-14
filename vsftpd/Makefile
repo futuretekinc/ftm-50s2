@@ -2,6 +2,7 @@ include ../Makefile.in
 
 BUILD_OPTIONS=CC=${CC} LIB_LOC=/opt/STM/STLinux-2.4/devkit/armv5/target/usr
 INSTALL_OPTIONS=DESTDIR=${DESTDIR} PREFIX=${PREFIX}
+
 APP=vsftpd
 VERSION=-3.0.3
 
@@ -20,6 +21,12 @@ build: configure
 
 install:
 	$(call install_package,${APP}${VERSION})
+	[ -d ${DESTDIR}/etc ] || mkdir -p ${DESTDIR}/etc
+	install -m 644 config/vsftpd.conf ${DESTDIR}/etc
+	[ -d ${DESTDIR}/etc/init.d ] || mkdir -p ${DESTDIR}/etc/init.d
+	install -m 755 config/initd_vsftpd ${DESTDIR}/etc/init.d/vsftpd
+	[ -d ${DESTDIR}/etc/rc.d ] || mkdir -p ${DESTDIR}/etc/rc.d
+	(cd ${DESTDIR}/etc/rc.d; ln -s ../init.d/vsftpd S70vsftpd;)
 
 clean:
 	$(call clean_package,${APP}${VERSION})

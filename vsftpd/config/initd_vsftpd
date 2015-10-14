@@ -1,0 +1,13 @@
+#!/bin/sh /etc/rc.common
+
+START=70
+
+start() {
+	/usr/sbin/vsftpd &
+
+}
+
+stop() {
+	PID=`pidof vsftpd`
+	[ -n ${PID} ] && killall vsftpd
+}
