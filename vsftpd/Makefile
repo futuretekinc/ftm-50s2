@@ -25,8 +25,6 @@ install:
 	install -m 644 config/vsftpd.conf ${DESTDIR}/etc
 	[ -d ${DESTDIR}/etc/init.d ] || mkdir -p ${DESTDIR}/etc/init.d
 	install -m 755 config/initd_vsftpd ${DESTDIR}/etc/init.d/vsftpd
-	[ -d ${DESTDIR}/etc/rc.d ] || mkdir -p ${DESTDIR}/etc/rc.d
-	(cd ${DESTDIR}/etc/rc.d; ln -s ../init.d/vsftpd S70vsftpd;)
 
 clean:
 	$(call clean_package,${APP}${VERSION})
