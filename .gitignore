@@ -1,1 +1,3 @@
 mmc
+linux-2.6.37/arch/arm/boot/compressed/piggy.gzip
+linux-2.6.37/arch/arm/boot/compressed/vmlinux

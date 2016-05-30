@@ -94,7 +94,7 @@ static struct pmx_dev *pmx_devs[] = {
 	&spear3xx_pmx_uart0,
 
 	/* spear320 specific devices */
-	&spear320s_pmx_fsmc[0],
+//	&spear320s_pmx_fsmc[0],
 	&spear320_pmx_uart1,
 	&spear320_pmx_uart2,
 	&spear320s_pmx_mii2,
@@ -188,11 +188,11 @@ static void __init spear320_ftm_init(void)
 
 	/* set sdhci device platform data */
 	sdhci_set_plat_data(&spear320_sdhci_device, &sdhci_plat_data);
-
+#if 0
 	/* set nand device's plat data */
 	fsmc_nand_set_plat_data(&spear320_nand_device, NULL, 0,
 			NAND_SKIP_BBTSCAN, FSMC_NAND_BW8, NULL, 1);
-
+#endif
 	/* initialize macb related data in macb plat data */
 	spear3xx_macb_setup();
 	macb_set_plat_data(&spear320_eth1_device, &spear320_macb_data);

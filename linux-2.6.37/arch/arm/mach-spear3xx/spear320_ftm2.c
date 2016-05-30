@@ -90,7 +90,7 @@ static struct pmx_dev *pmx_devs[] = {
 	&spear3xx_pmx_uart0,
 
 	/* spear320 specific devices */
-	&spear320s_pmx_fsmc[0],
+//	&spear320s_pmx_fsmc[0],
 	&spear320_pmx_uart1,
 	&spear320_pmx_uart2,
 	&spear320s_pmx_mii2,
@@ -129,7 +129,7 @@ static struct platform_device *plat_devs[] __initdata = {
 	/* spear320 specific devices */
 	&spear320_eth1_device,
 	&spear320_i2c1_device,
-	&spear320_nand_device,
+//	&spear320_nand_device,
 	&spear320_phy_device,
 	&spear320_plgpio_device,
 	&spear320_pwm_device,
@@ -186,8 +186,8 @@ static void __init spear320_ftm_init(void)
 	sdhci_set_plat_data(&spear320_sdhci_device, &sdhci_plat_data);
 
 	/* set nand device's plat data */
-	fsmc_nand_set_plat_data(&spear320_nand_device, NULL, 0,
-			NAND_SKIP_BBTSCAN, FSMC_NAND_BW8, NULL, 1);
+//	fsmc_nand_set_plat_data(&spear320_nand_device, NULL, 0,
+//			NAND_SKIP_BBTSCAN, FSMC_NAND_BW8, NULL, 1);
 
 	/* initialize macb related data in macb plat data */
 	spear3xx_macb_setup();
@@ -263,7 +263,7 @@ void get_ethaddr(int id, u8 *addr)
 	}
 }
 
-MACHINE_START(SPEAR320_FTM, "FutureTek-M2M")
+MACHINE_START(SPEAR320_FTM2, "FutureTek-M2M")
 	.boot_params	=	0x00000100,
 	.map_io		=	spear320_map_io,
 	.init_irq	=	spear3xx_init_irq,

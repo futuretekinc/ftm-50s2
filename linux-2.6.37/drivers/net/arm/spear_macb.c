@@ -196,7 +196,7 @@ static void __macb_set_hwaddr(struct macb *bp)
 
 static void __init macb_get_hwaddr(struct macb *bp)
 {
-#if defined(CONFIG_MACH_SPEAR320_FTM)
+#if defined(CONFIG_MACH_SPEAR320_FTM) || defined(CONFIG_MACH_SPEAR320_FTM2)
 	u8 addr[6];
 
 	extern	void get_ethaddr(int id, u8 *addr);

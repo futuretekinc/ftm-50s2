@@ -241,7 +241,7 @@ void stmmac_set_mac_addr(void __iomem *ioaddr, u8 addr[6],
 void stmmac_get_mac_addr(void __iomem *ioaddr, unsigned char *addr,
 			 unsigned int high, unsigned int low)
 {
-#if defined(CONFIG_MACH_SPEAR320_FTM) 
+#if defined(CONFIG_MACH_SPEAR320_FTM) || defined(CONFIG_MACH_SPEAR320_FTM2) 
 	extern	void get_ethaddr(int, char *);
 
 	get_ethaddr(0, (char *)addr);

@@ -35,8 +35,37 @@ config MACH_SPEAR320_FTM
 	help
 	  Supports FutureTek M2M Broker FTMB-S1 Board
 
+config MACH_SPEAR320_FTM2
+	bool "FutureTek M2M Broker FTM-50S v2.0"
+	select CPU_SPEAR320
+	help
+	  Supports FutureTek M2M Broker FTM-50 Board
 
 if MACH_SPEAR320_FTM
+choice 
+	prompt "FTM-50S options"
+	default MACH_FTM50S_GEN
+
+config MACH_FTM_50S2
+	bool "Version 2.0"
+	help
+	  Supports FutureTek M2M Broker v2.0 Board
+
+config MACH_FTM50S_GEN
+	bool "FTM-50S Genenal Edition"
+
+config MACH_FTM50S_FS
+	bool "FTM-50S for Future Systems M2M"
+	help
+		Supports for Future Systems M2M
+config MACH_FTM50S_TP
+	bool "FTM-50S with ThingPlus"
+	help
+		Supports for Daliworks ThingPlus
+endchoice 
+endif
+
+if MACH_SPEAR320_FTM2
 choice 
 	prompt "FTM-50S options"
 	default MACH_FTM50S_GEN
